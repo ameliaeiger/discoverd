@@ -21,8 +21,7 @@ export default function Dashboard() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#A7D9A3',
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -3,7 +3,7 @@ import React from 'react'
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1,
     backgroundColor: '#A7D9A3',
     alignItems: 'center',
     justifyContent: 'center',
