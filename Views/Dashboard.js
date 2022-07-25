@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 //Libraries
 import * as ImagePicker from 'expo-image-picker';
 import { Button } from 'react-native-paper';
-import PickImage from "../components/PickImage";
+import PickImage from "../components/PickImage/PickImage";
 
 
 export default function Dashboard() {

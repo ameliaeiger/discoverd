@@ -26,8 +26,6 @@ export default function PickImage() {
       setUri(pickerResult.uri)
       }
 
-      console.log("LOCALURISTATE >>", localUri)
-
   return (
     <View style={styles.container}>
       <View>{!localUri ? <Text>Please select an image to continue.</Text> :
