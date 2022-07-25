@@ -8,6 +8,7 @@ import {styles} from '../PickImage/PickImageStyles'
 import { Button } from "react-native-paper"
 
 export default function TakePicture() {
+    const [localUri, setUri] = useState("")
 
   let openCameraAsync = async () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
@@ -18,21 +19,21 @@ export default function TakePicture() {
     }
     let imageResult = await ImagePicker.launchCameraAsync()
 
-    if(pickerResult.cancelled) {
+    if(imageResult.cancelled) {
       return
     }
-    console.log(imageResult)
+    setUri(imageResult.uri)
 }
   return (
     <View style={styles.container}>
-      <View>{!localUri ? <Text>Please select an image to continue.</Text> :
+      <View>{!localUri ? <Text>Take a Picture!</Text> :
         <Image
           style={styles.thumbnail}
           source={{uri:localUri}}
         />}
       </View>
       <Button
-        onPress={openImagePickerAsync}
+        onPress={openCameraAsync}
         icon="camera"
         mode="contained"
         style={styles.button}>

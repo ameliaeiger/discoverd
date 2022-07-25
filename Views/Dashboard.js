@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Button } from 'react-native-paper';
 import PickImage from "../components/PickImage/PickImage";
+import TakePicture from "../components/TakePicture/TakePicture";
 
 
 export default function Dashboard() {
@@ -14,6 +15,7 @@ export default function Dashboard() {
         <Text>Dashboard</Text>
             <View style={styles.container}>
               <PickImage />
+              <TakePicture />
             </View>
       </View>
   );
