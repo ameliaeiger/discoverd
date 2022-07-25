@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
-    flex: 4,
     color: "#fff",
     backgroundColor: "#2EC17E",
     alignItems: "center",
