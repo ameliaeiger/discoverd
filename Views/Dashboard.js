@@ -9,17 +9,6 @@ import PickImage from "../components/PickImage";
 
 export default function Dashboard() {
 
-  // Image picker init
-  let openImagePickerAsync = async () => {
-    console.log("u been clicked n picked bro")
-    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!permissionResult.granted) {
-      alert("Permission to access camera roll is required!");
-      return;
-    }
-    let pickerResult = await ImagePicker.launchImageLibraryAsync();
-    console.log("u got pickered", pickerResult);
-  }
   return (
       <View>
         <Text>Dashboard</Text>

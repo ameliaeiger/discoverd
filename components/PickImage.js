@@ -8,8 +8,9 @@ import * as Haptics from 'expo-haptics';
 import { Button } from "react-native-paper"
 
 export default function PickImage() {
-  const [selectedImage, setSelectedImage] = useState("")
+  
   const [localUri, setUri] = useState("")
+
     let openImagePickerAsync = async () => {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
       let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync()
@@ -25,29 +26,19 @@ export default function PickImage() {
       }
 
       console.log("LOCALURISTATE >>", localUri)
-      console.log("SELECTED IMAGE", selectedImage)
 
   return (
-
-  
-
     <View style={styles.container}>
-      {/* <View>
+      <View>{!localUri ? <Text>Please select an image to continue.</Text> :
         <Image
-          source={{uri: localUri}}
-          style={styles.thumbnail}
-        />
-      </View> */}
-      <View>{!localUri ? <Text>Please select an image to continue.</Text> : 
-        <Image 
           style={styles.thumbnail}
           source={{uri:localUri}}
         />}
       </View>
-      <Button 
+      <Button
         onPress={openImagePickerAsync}
-        icon="camera" 
-        mode="contained" 
+        icon="camera"
+        mode="contained"
         style={styles.button}>
         Pressss
       </Button>
