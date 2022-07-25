@@ -3,12 +3,13 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import Constants from 'expo-constants'
 import * as ImagePicker from 'expo-image-picker'
 import * as Haptics from 'expo-haptics';
+import {styles} from './PickImageStyles'
 
 //Libraries
 import { Button } from "react-native-paper"
 
 export default function PickImage() {
-  
+
   const [localUri, setUri] = useState("")
 
     let openImagePickerAsync = async () => {
@@ -45,24 +46,3 @@ export default function PickImage() {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    border: "2px solid blue",
-  },
-  button: {
-    flex: .08,
-    color: "#fff",
-    backgroundColor: "#2EC17E",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  thumbnail: {
-    height: 200,
-    width: 200,
-  }
-});
