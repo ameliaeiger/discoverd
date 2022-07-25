@@ -8,6 +8,8 @@ import Dashboard from "./Views/Dashboard";
 //Libraries
 import * as ImagePicker from 'expo-image-picker';
 
+
+
 export default function App() {
 
 

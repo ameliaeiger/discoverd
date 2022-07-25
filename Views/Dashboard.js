@@ -6,6 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Button } from 'react-native-paper';
 import PickImage from "../components/PickImage";
 
+
 export default function Dashboard() {
 
   // Image picker init
