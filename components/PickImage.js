@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
-import Constants from 'expo-constants'
+import { Text, View, Image } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
-import * as Haptics from 'expo-haptics';
-
+import * as Haptics from 'expo-haptics'
 //Libraries
 import { Button } from "react-native-paper"
+import styles from "./PickImageStyles"
 
 export default function PickImage() {
-  const [selectedImage, setSelectedImage] = useState("")
   const [localUri, setUri] = useState("")
     let openImagePickerAsync = async () => {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
@@ -23,21 +21,9 @@ export default function PickImage() {
       }
       setUri(pickerResult.uri)
       }
-
       console.log("LOCALURISTATE >>", localUri)
-      console.log("SELECTED IMAGE", selectedImage)
-
   return (
-
-  
-
     <View style={styles.container}>
-      {/* <View>
-        <Image
-          source={{uri: localUri}}
-          style={styles.thumbnail}
-        />
-      </View> */}
       <View>{!localUri ? <Text>Please select an image to continue.</Text> : 
         <Image 
           style={styles.thumbnail}
@@ -49,29 +35,8 @@ export default function PickImage() {
         icon="camera" 
         mode="contained" 
         style={styles.button}>
-        Pressss
+        Select an Image
       </Button>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    border: "2px solid blue",
-  },
-  button: {
-    flex: .08,
-    color: "#fff",
-    backgroundColor: "#2EC17E",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  thumbnail: {
-    height: 200,
-    width: 200,
-  }
-});
