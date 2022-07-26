@@ -9,7 +9,6 @@ import {styles} from './PickImageStyles'
 import { Button } from "react-native-paper"
 
 export default function PickImage() {
-  console.log(styles)
   const [localUri, setUri] = useState("")
 
     let openImagePickerAsync = async () => {
