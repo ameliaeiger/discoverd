@@ -4,27 +4,18 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 //Libraries
 import * as ImagePicker from 'expo-image-picker';
 import { Button } from 'react-native-paper';
-import PickImage from "../components/PickImage";
+import PickImage from "../components/PickImage/PickImage";
+import TakePicture from "../components/TakePicture/TakePicture";
 
 
 export default function Dashboard() {
 
-  // Image picker init
-  let openImagePickerAsync = async () => {
-    console.log("u been clicked n picked bro")
-    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!permissionResult.granted) {
-      alert("Permission to access camera roll is required!");
-      return;
-    }
-    let pickerResult = await ImagePicker.launchImageLibraryAsync();
-    console.log("u got pickered", pickerResult);
-  }
   return (
       <View>
         <Text>Dashboard</Text>
             <View style={styles.container}>
               <PickImage />
+              <TakePicture />
             </View>
       </View>
   );
@@ -32,8 +23,7 @@ export default function Dashboard() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#A7D9A3',
     alignItems: 'center',
     justifyContent: 'center',
   },
