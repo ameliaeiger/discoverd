@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import PickImage from "../components/PickImage";
 
 export default function Dashboard() {
+  console.log("dashboard component")
   return (
       <View>
         <Text>Dashboard</Text>
