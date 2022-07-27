@@ -37,7 +37,7 @@ export default function PickImage({handleChange}) {
         icon="camera"
         mode="contained"
         style={styles.button}>
-        Pressss
+        Upload Image
       </Button>
   )
 }

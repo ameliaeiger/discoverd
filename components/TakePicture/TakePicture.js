@@ -30,7 +30,7 @@ export default function TakePicture({handleChange}) {
         icon="camera"
         mode="contained"
         style={styles.button}>
-        Pressss
+        Take a Picture
       </Button>
   )
 }

@@ -14,14 +14,12 @@ export default function Dashboard() {
   const [imageUris, addImageUris] = useState([]);
   const [allImages, createImageComponents] = useState([]);
 
-  const getView = () => {
-    imageUris.forEach((image) => {
-      createImageComponents([...allImages, <PlantImage uri={image}/>])
-    })
+  const getView = (uri) => {
+    createImageComponents([...allImages, <PlantImage uri={uri}/>])
   }
   const handleChange = (uri) => {
     addImageUris(imageUris => [...imageUris, uri])
-    getView()
+    getView(uri)
   }
 
 
