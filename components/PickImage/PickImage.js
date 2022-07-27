@@ -1,18 +1,18 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
-import Constants from 'expo-constants'
+import { Text, View, Image } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import * as Haptics from 'expo-haptics';
 import {styles} from './PickImageStyles'
-
 //Libraries
 import { Button } from "react-native-paper"
 
 export default function PickImage() {
   const [localUri, setUri] = useState("")
-
     let openImagePickerAsync = async () => {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+        .catch(error => {
+          return
+        })
       let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync()
       if(!permissionResult.granted) {
         alert('Access to camera roll is required for the app to function as intended')
@@ -24,10 +24,13 @@ export default function PickImage() {
       }
       setUri(pickerResult.uri)
       }
-
   return (
     <View style={styles.container}>
-      <View>{!localUri ? <Text>Please select an image to continue.</Text> :
+      <View>
+        {!localUri ? 
+        <Text>
+          Please select an image to continue.
+        </Text> :
         <Image
           style={styles.thumbnail}
           source={{uri:localUri}}

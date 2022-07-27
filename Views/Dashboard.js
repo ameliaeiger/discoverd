@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
     height: 200,
     width: 150,
   }
-});
+})

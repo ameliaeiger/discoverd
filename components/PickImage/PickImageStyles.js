@@ -1,5 +1,4 @@
 import { StyleSheet} from 'react-native'
-import React from 'react'
 
 export const styles = StyleSheet.create({
   container: {
@@ -9,12 +8,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
-    flex: .08,
-    padding: 40,
+    elevation: 5,
+    height: 75,
+    width: 200,
     borderRadius: 5,
     color: '#8C8C8C',
     backgroundColor: '#E4E4E4',
-    alignItems: "center",
     justifyContent: "center",
   },
   thumbnail: {
@@ -22,4 +21,4 @@ export const styles = StyleSheet.create({
     width: 200,
     resizeMode: 'contain'
   }
-});
+})
