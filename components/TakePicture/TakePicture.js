@@ -22,7 +22,7 @@ export default function TakePicture({handleChange}) {
       return
     }
     setUri(imageResult.uri)
-    handleChange(imageResult.uri)
+    handleChange(image)
 }
   return (
       <Button
@@ -32,6 +32,5 @@ export default function TakePicture({handleChange}) {
         style={styles.button}>
         Pressss
       </Button>
-    </View>
   )
 }

@@ -39,6 +39,5 @@ export default function PickImage({handleChange}) {
         style={styles.button}>
         Pressss
       </Button>
-    </View>
   )
 }

@@ -6,20 +6,29 @@ import * as ImagePicker from 'expo-image-picker';
 import { Button } from 'react-native-paper';
 import PickImage from "../components/PickImage/PickImage";
 import TakePicture from "../components/TakePicture/TakePicture";
+import PlantImage from '../components/ImageDisplay/PlantImage'
 
 
 export default function Dashboard() {
 
   const [imageUris, addImageUris] = useState([]);
+  const [allImages, createImageComponents] = useState([]);
 
-  const handleChange = (uri) => {
-    console.log('uri in handle change',uri)
-    addImageUris(imageUris => [...imageUris, uri])
+  const getView = () => {
+    imageUris.forEach((image) => {
+      createImageComponents([...allImages, <PlantImage uri={image}/>])
+    })
   }
+  const handleChange = (uri) => {
+    addImageUris(imageUris => [...imageUris, uri])
+    getView()
+  }
+
 
   return (
       <View>
         <Text>Dashboard</Text>
+            {allImages}
             <View style={styles.container}>
               <PickImage handleChange={handleChange}/>
               <TakePicture handleChange={handleChange}/>
