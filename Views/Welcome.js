@@ -1,36 +1,58 @@
-import * as React from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Text } from "react-native-paper"
+import * as React from "react"
+import { StyleSheet, View } from "react-native"
+import { Text, Button } from "react-native-paper"
+import { NavLink } from "react-router-dom"
 
 export default function Welcome() {
     console.log("welcome component")
+    const go = () => {
+      console.log("yo")
+
+    }
 
   return (
-      <View>
-        <Text style={styles.text}>
-            Welcome! 🌿
-        </Text>
-        <Text style={styles.text}>discoverd is a tool to help you identify the plant life around you.</Text>
+      <View style={styles.container}>
+        <View>
+          <Text style={styles.text}>
+              Welcome! 🌿
+          </Text>
+          <Text style={styles.text}>
+            discoverd is a tool to help you identify the plant life around you.
+          </Text>
+        </View>
+        <NavLink>
+          Button
+        </NavLink>
+
+
+
+
+
+        {/* <Button
+          style={styles.button}
+          icon="camera"
+          mode="contained"
+          onPress={go}
+          onPress={openImagePickerAsync}
+          >Get started!</Button> */}
       </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
   },
   text: {
     fontFamily: "courier new",
-    fontSize: 25,
+    fontSize: 30,
   },
   button: {
-    color: "#fff",
-    backgroundColor: "#2EC17E",
-    alignItems: "center",
+    backgroundColor: "green",
     justifyContent: "center",
-    height: 200,
-    width: 150,
-  }
-});
+    height: 40,
+    width: 200,
+    fontSize: 30,
+  },
+})
