@@ -5,7 +5,7 @@ import * as Haptics from 'expo-haptics'
 import {styles} from '../PickImage/PickImageStyles'
 import { Button } from "react-native-paper"
 
-export default function TakePicture() {
+export default function TakePicture({handleChange}) {
   const [localUri, setUri] = useState("")
   let openCameraAsync = async () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
@@ -22,24 +22,15 @@ export default function TakePicture() {
       return
     }
     setUri(imageResult.uri)
+    handleChange(imageResult.uri)
 }
   return (
-    <View style={styles.container}>
-      <View>
-        {!localUri ? 
-          <Text>Take a Picture!</Text> :
-          <Image
-            style={styles.thumbnail}
-            source={{uri:localUri}}
-        />}
-      </View>
       <Button
         onPress={openCameraAsync}
         icon="camera"
         mode="contained"
         style={styles.button}>
-        Pressss
+        Take a Picture
       </Button>
-    </View>
   )
 }

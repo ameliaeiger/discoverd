@@ -6,8 +6,10 @@ import {styles} from './PickImageStyles'
 //Libraries
 import { Button } from "react-native-paper"
 
-export default function PickImage() {
+export default function PickImage({handleChange}) {
+
   const [localUri, setUri] = useState("")
+
     let openImagePickerAsync = async () => {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
         .catch(error => {
@@ -18,31 +20,24 @@ export default function PickImage() {
         alert('Access to camera roll is required for the app to function as intended')
         return
       }
+
       let pickerResult = await ImagePicker.launchImageLibraryAsync()
       if(pickerResult.cancelled) {
         return
       }
       setUri(pickerResult.uri)
+      handleChange(pickerResult.uri)
       }
+
+
+
   return (
-    <View style={styles.container}>
-      <View>
-        {!localUri ? 
-        <Text>
-          Please select an image to continue.
-        </Text> :
-        <Image
-          style={styles.thumbnail}
-          source={{uri:localUri}}
-        />}
-      </View>
       <Button
         onPress={openImagePickerAsync}
         icon="camera"
         mode="contained"
         style={styles.button}>
-        Pressss
+        Upload Image
       </Button>
-    </View>
   )
 }
