@@ -5,12 +5,13 @@ import { StyleSheet, SwitchBase, Text, View, TouchableOpacity } from 'react-nati
 // import { Provider as PaperProvider } from 'react-native-paper'
 import Welcome from "./Views/Welcome"
 import Dashboard from "./Views/Dashboard"
-import Header from "./components/Header"
+import Header from "./components/header/Header"
 
 //Libraries
-import * as ImagePicker from 'expo-image-picker'
-import { Routes, Route, Router, PathRouteProps, NativeRouter, Navigate } from 'react-router-native'
-import { Link } from 'react-router-native'
+import * as ImagePicker from "expo-image-picker"
+import { BrowswerRouter } from "react-router-dom"
+import { Routes, Route, NativeRouter } from "react-router-native"
+import { Link } from "react-router-dom"
 
 
 export default function App() {
@@ -23,12 +24,9 @@ export default function App() {
         <Route path="/" element={<Welcome />}/>
         <Route path="/dashboard" element={<Dashboard />}/>
       </Routes>
-        <na
-          src="/dashboard"
-          Welcome
-          /> 
+        <Link to="/dashboard">CHOOSE IMAGE</Link>
+        <Link to="/">WELCOME</Link>  
     </NativeRouter>
-    
     </>
   )
 }

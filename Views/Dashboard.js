@@ -1,7 +1,8 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 //Libraries
-import PickImage from "../components/PickImage";
+import PickImage from "../components/pickimage/PickImage.js"
+import TakePicture from '../components/takepicture/TakePicture.js'
 
 export default function Dashboard() {
   console.log("dashboard component")
@@ -10,9 +11,10 @@ export default function Dashboard() {
         <Text>Dashboard</Text>
             <View style={styles.container}>
               <PickImage />
+              <TakePicture />
             </View>
       </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -30,4 +32,4 @@ const styles = StyleSheet.create({
     height: 200,
     width: 150,
   }
-});
+})

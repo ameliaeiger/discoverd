@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     },
     button: {
       backgroundColor: "#e4e4e4",
-      alignItems: "center",
       justifyContent: "center",
       borderColor: "#BFBFBF",
       borderWidth: 1,
@@ -22,6 +21,6 @@ const styles = StyleSheet.create({
       height: 200,
       width: 200,
     }
-  });
+  })
 
   export default styles
