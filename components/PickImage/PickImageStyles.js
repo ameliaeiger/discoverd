@@ -21,4 +21,4 @@ export const styles = StyleSheet.create({
     width: 200,
     resizeMode: 'contain'
   }
-});
+})
