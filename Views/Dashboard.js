@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 //Libraries
 import * as ImagePicker from 'expo-image-picker';
@@ -10,12 +10,19 @@ import TakePicture from "../components/TakePicture/TakePicture";
 
 export default function Dashboard() {
 
+  const [imageUris, addImageUris] = useState([]);
+
+  const handleChange = (uri) => {
+    console.log('uri in handle change',uri)
+    addImageUris(imageUris => [...imageUris, uri])
+  }
+
   return (
       <View>
         <Text>Dashboard</Text>
             <View style={styles.container}>
-              <PickImage />
-              <TakePicture />
+              <PickImage handleChange={handleChange}/>
+              <TakePicture handleChange={handleChange}/>
             </View>
       </View>
   );
