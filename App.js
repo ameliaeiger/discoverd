@@ -5,6 +5,7 @@ import Dashboard from "./Views/Dashboard";
 
 
 export default function App() {
+
   return (
       <View style={styles.container}>
         <Dashboard />

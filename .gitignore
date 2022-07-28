@@ -54,5 +54,5 @@ buck-out/
 web-build/
 dist/
 
-#dotenv
-.env
+#environmental variables
+API_KEY.js
