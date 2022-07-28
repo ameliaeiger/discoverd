@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import { Text, View, Image } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import * as Haptics from 'expo-haptics';
 import {styles} from './PickImageStyles'
@@ -28,9 +27,6 @@ export default function PickImage({handleChange}) {
       setUri(pickerResult.uri)
       handleChange(pickerResult.uri)
       }
-
-
-
   return (
       <Button
         onPress={openImagePickerAsync}

@@ -1,19 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'expo-status-bar'
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 //Libraries
-import * as ImagePicker from 'expo-image-picker';
-import { Button } from 'react-native-paper';
-import PickImage from "../components/PickImage/PickImage";
-import TakePicture from "../components/TakePicture/TakePicture";
+import * as ImagePicker from 'expo-image-picker'
+import { Button } from 'react-native-paper'
+import PickImage from "../components/PickImage/PickImage"
+import TakePicture from "../components/TakePicture/TakePicture"
 import PlantImage from '../components/ImageDisplay/PlantImage'
-import { Base64 } from 'base64-string'
+
+import Results from "../components/Results"
+import Data from "./data.js"
 
 
 export default function Dashboard() {
-
-  const [imageUris, addImageUris] = useState([]);
-  const [allImages, createImageComponents] = useState([]);
+  const [imageUris, addImageUris] = useState([])
+  const [allImages, createImageComponents] = useState([])
+  const [suggestions, setSuggestions] = useState(Data().suggestions)
+  const [resultsCards, setResultsCards] = useState("")
+  const allResultsCards = makeArray(suggestions)
 
   const getView = (uri) => {
     createImageComponents([...allImages, <PlantImage uri={uri}/>])
@@ -22,6 +26,7 @@ export default function Dashboard() {
     addImageUris(imageUris => [...imageUris, uri])
     getView(uri)
   }
+
 
   const handleSubmit = (uri) => {
     const data = {
@@ -53,31 +58,56 @@ export default function Dashboard() {
        });
   }
 
+
   return (
-      <View>
-        <Text>Dashboard</Text>
-            {allImages}
+      <View style={styles.view}>
             <View style={styles.container}>
-              <PickImage handleChange={handleChange}/>
-              <TakePicture handleChange={handleChange}/>
-              <Button onPress={() => handleSubmit(imageUris)} title="Submit"/>
+
+              <ScrollView style={styles.scrollView}>
+                {allResultsCards}
+              </ScrollView>
+            <ScrollView >
+              {allImages}
+            </ScrollView>
+              <View style={styles.buttonContainer}>
+                <PickImage handleChange={handleChange}/>
+                <TakePicture handleChange={handleChange}/>
+                <Button onPress={() => handleSubmit(imageUris)} title="Submit"/>
+              </View>
             </View>
       </View>
-  );
+  )
+}
+
+const makeArray = (array) => {
+  let emptyArray = []
+  array.forEach(suggestion => {
+    emptyArray.push(
+      <Results
+      data={suggestion}/>
+      )
+  })
+  return emptyArray
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    maxHeight: 500,
+  },
   container: {
+    flexDirection: "column",
     backgroundColor: '#A7D9A3',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: "center",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    marginBottom: 5,
   },
   button: {
     color: "#fff",
     backgroundColor: "#2EC17E",
     alignItems: "center",
     justifyContent: "center",
-    height: 200,
-    width: 150,
   }
 })
