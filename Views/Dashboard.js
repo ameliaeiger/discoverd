@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar'
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
-import { API_KEY } from "@env"
+import { API_KEY } from "react-native-dotenv"
 
 //Libraries
 import * as ImagePicker from 'expo-image-picker'

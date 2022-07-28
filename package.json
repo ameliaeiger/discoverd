@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "babel-plugin-inline-dotenv": "^1.7.0",
     "base64-string": "^1.1.2",
     "expo": "~45.0.0",
     "expo-haptics": "~11.2.0",
