@@ -5,6 +5,7 @@ import * as Haptics from 'expo-haptics'
 import { Button } from "react-native-paper"
 
 export default function TakePicture() {
+  console.log("take picture component")
   const [localUri, setUri] = useState("")
   let openCameraAsync = async () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)

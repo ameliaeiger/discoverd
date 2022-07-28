@@ -1,13 +1,15 @@
 import * as React from "react"
 import { StyleSheet, View } from "react-native"
 import { Text, Button } from "react-native-paper"
-import { NavLink } from "react-router-dom"
+import * as Linking from "expo-linking"
 
 export default function Welcome() {
     console.log("welcome component")
-    const go = () => {
-      console.log("yo")
 
+    const handleClick = (e) => {
+      e.preventDefault()
+      console.log("button pressed")
+      Linking.openURL("http://localhost:19006/dashboard")
     }
 
   return (
@@ -20,21 +22,14 @@ export default function Welcome() {
             discoverd is a tool to help you identify the plant life around you.
           </Text>
         </View>
-        <NavLink>
-          Button
-        </NavLink>
 
-
-
-
-
-        {/* <Button
+        <Button
           style={styles.button}
           icon="camera"
           mode="contained"
-          onPress={go}
-          onPress={openImagePickerAsync}
-          >Get started!</Button> */}
+          onPress={event => handleClick(event)}
+          >Get started!
+        </Button>
       </View>
   )
 }
@@ -45,7 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    fontFamily: "courier new",
+    // fontFamily: "courier new",
     fontSize: 30,
   },
   button: {

@@ -7,6 +7,7 @@ import * as Haptics from 'expo-haptics';
 import { Button } from "react-native-paper"
 
 export default function PickImage() {
+  console.log("pick image component")
   const [localUri, setUri] = useState("")
     let openImagePickerAsync = async () => {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
@@ -23,6 +24,7 @@ export default function PickImage() {
         return
       }
       setUri(pickerResult.uri)
+      console.log(pickerResult)
       }
   return (
     <View style={styles.container}>

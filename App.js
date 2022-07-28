@@ -1,31 +1,17 @@
-import { StatusBar } from 'expo-status-bar'
 import React from 'react'
-import { StyleSheet, SwitchBase, Text, View, TouchableOpacity } from 'react-native'
-// import { AppRegistry } from 'react-native'
-// import { Provider as PaperProvider } from 'react-native-paper'
+import { StyleSheet, SwitchBase, Text, View, TouchableOpacity, Switch } from 'react-native'
 import Welcome from "./Views/Welcome"
 import Dashboard from "./Views/Dashboard"
-import Header from "./components/header/Header"
-
-//Libraries
-import * as ImagePicker from "expo-image-picker"
-import { BrowswerRouter } from "react-router-dom"
-import { Routes, Route, NativeRouter } from "react-router-native"
-import { Link } from "react-router-dom"
-
+import { Routes, Route, NativeRouter, Link } from "react-router-native"
 
 export default function App() {
-
-
   return (
     <>
     <NativeRouter>
       <Routes>
-        <Route path="/" element={<Welcome />}/>
+        <Route exact path="/" element={<Welcome />}/>
         <Route path="/dashboard" element={<Dashboard />}/>
       </Routes>
-        <Link to="/dashboard">CHOOSE IMAGE</Link>
-        <Link to="/">WELCOME</Link>  
     </NativeRouter>
     </>
   )
