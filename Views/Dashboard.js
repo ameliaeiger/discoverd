@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar'
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
+import {API_KEY} from "../API_KEY.js"
+
 //Libraries
 import * as ImagePicker from 'expo-image-picker'
 import { Button } from 'react-native-paper'
@@ -27,10 +29,11 @@ export default function Dashboard() {
     getView(uri)
   }
 
+  console.log("env key", API_KEY)
 
   const handleSubmit = (uri) => {
     const data = {
-        api_key: 'NklRmoWXEJSh0KJwF8SHOJYEwpX5FnSZyr7n5bOJ5nrwkpEHKz',
+        api_key: API_KEY,
         images: [uri[0]],
         plant_language: 'en',
             plant_details: ['common_names',
@@ -45,7 +48,7 @@ export default function Dashboard() {
          method: 'POST',
          headers: {
            'Content-Type': 'application/json',
-            "Api-Key": 'NklRmoWXEJSh0KJwF8SHOJYEwpX5FnSZyr7n5bOJ5nrwkpEHKz',
+            "Api-Key": API_KEY,
          },
          body: JSON.stringify(data),
        })
