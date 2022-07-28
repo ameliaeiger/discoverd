@@ -7,8 +7,10 @@ import { Button } from 'react-native-paper'
 import PickImage from "../components/PickImage/PickImage"
 import TakePicture from "../components/TakePicture/TakePicture"
 import PlantImage from '../components/ImageDisplay/PlantImage'
+
 import Results from "../components/Results"
 import Data from "./data.js"
+
 
 export default function Dashboard() {
   const [imageUris, addImageUris] = useState([])
@@ -24,9 +26,43 @@ export default function Dashboard() {
     addImageUris(imageUris => [...imageUris, uri])
     getView(uri)
   }
+
+
+  const handleSubmit = (uri) => {
+    const data = {
+        api_key: 'NklRmoWXEJSh0KJwF8SHOJYEwpX5FnSZyr7n5bOJ5nrwkpEHKz',
+        images: [uri[0]],
+        plant_language: 'en',
+            plant_details: ['common_names',
+                            'url',
+                            'name_authority',
+                            'wiki_description',
+                            'taxonomy',
+                            'synonyms'],
+      }
+
+      fetch('https://api.plant.id/v2/identify', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+            "Api-Key": 'NklRmoWXEJSh0KJwF8SHOJYEwpX5FnSZyr7n5bOJ5nrwkpEHKz',
+         },
+         body: JSON.stringify(data),
+       })
+       .then(response => response.json())
+       .then(result => {
+         console.log('Success:', result);
+       })
+       .catch((error) => {
+         console.error('Error:', error);
+       });
+  }
+
+
   return (
       <View style={styles.view}>
             <View style={styles.container}>
+
               <ScrollView style={styles.scrollView}>
                 {allResultsCards}
               </ScrollView>
@@ -36,6 +72,7 @@ export default function Dashboard() {
               <View style={styles.buttonContainer}>
                 <PickImage handleChange={handleChange}/>
                 <TakePicture handleChange={handleChange}/>
+                <Button onPress={() => handleSubmit(imageUris)} title="Submit"/>
               </View>
             </View>
       </View>
