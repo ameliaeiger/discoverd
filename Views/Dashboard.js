@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar'
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
-require("dotenv").config();
+import { API_KEY } from "@env"
 
 //Libraries
 import * as ImagePicker from 'expo-image-picker'
@@ -29,7 +29,7 @@ export default function Dashboard() {
     getView(uri)
   }
 
-  console.log(process.env.API_KEY)
+  console.log("env key", API_KEY)
 
   const handleSubmit = (uri) => {
     const data = {
