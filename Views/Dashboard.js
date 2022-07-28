@@ -33,7 +33,7 @@ export default function Dashboard() {
 
   const handleSubmit = (uri) => {
     const data = {
-        api_key: `${process.env.API_KEY}`,
+        api_key: API_KEY,
         images: [uri[0]],
         plant_language: 'en',
             plant_details: ['common_names',
@@ -48,7 +48,7 @@ export default function Dashboard() {
          method: 'POST',
          headers: {
            'Content-Type': 'application/json',
-            "Api-Key": `${process.env.API_KEY}`,
+            "Api-Key": API_KEY,
          },
          body: JSON.stringify(data),
        })
