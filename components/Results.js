@@ -1,40 +1,34 @@
-import React, {useState, useEffect} from 'react';
-import { Alert, Text, View, StyleSheet, Button, TextInput, ScrollView, Image, TouchableOpacity, Linking } from 'react-native';
+import React, {useState, useEffect} from 'react'
+import { Alert, Text, View, StyleSheet, Button, TextInput, ScrollView, Image, TouchableOpacity, Linking } from 'react-native'
 import {
   Avatar,
   Paragraph,
   Card,
   useTheme,
-} from 'react-native-paper';
-import Constants from 'expo-constants';
-
-
+} from 'react-native-paper'
 
 export default function Results({data}) {
   const [plant, setPlant] = useState(data.plant_name)
   const [plantDetails, setPlantDetails] = useState(data.plant_details)
   const [commonName, setCommonName] = useState(plantDetails.common_names)
 
-  console.log(plantDetails)
-
-
   return(
-    <View style={styles.container}>
-    <Card>
-        <Card.Title 
-          title={commonName}
-          subtitle={plant}/>
-        <Card.Content>
-          <Image
-            style={styles.container}
-            source={{
-              uri: plantDetails.wiki_image.value
-              }}
-          />
-          <Paragraph>
-            {plantDetails.wiki_description.value}
-          </Paragraph>
-          <TouchableOpacity>
+        <Card style={styles.container}>
+            <Card.Title 
+            title={commonName}
+            subtitle={plant}/>
+            <Card.Content>
+            <Image
+                style={styles.image}
+                source={{
+                uri: plantDetails.wiki_image.value
+                }}
+            />
+            <Paragraph
+                style={styles.paragraph}>
+                {plantDetails.wiki_description.value}
+            </Paragraph>
+            <TouchableOpacity>
             <Button
               title="Find out more!"
               onPress={() => Linking.openURL(plantDetails.url)}>
@@ -42,26 +36,31 @@ export default function Results({data}) {
           </TouchableOpacity>
         </Card.Content>
       </Card>
-    </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 10,
     justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
+    alignContent: "center",
+    margin: 10,
     backgroundColor: '#ecf0f1',
-    padding: 8,
-    height: 200,
+    padding: 10,
+    height: 300,
+    minHeight: 400,
   },
   paragraph: {
-    margin: 24,
-    fontSize: 18,
+    // flex: 2,
+    // margin: 24,
+    // fontSize: 18,
     fontWeight: 'bold',
-    textAlign: 'center',
+    height: 100,
+    // minWidth: 50,
   },
   image: {
-    width: 193, height: 110, marginTop:50
+    maxWidth: 200,
+    maxHeight: 300,
+    minHeight: 150,
+    minWidth: 50,
     }
-});
+})
