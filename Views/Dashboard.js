@@ -24,8 +24,7 @@ export default function Dashboard() {
   }
   return (
       <View>
-        <Text>Dashboard</Text>
-            <Results />
+            {/* <Results /> */}
             {allImages}
             <View style={styles.container}>
               <PickImage handleChange={handleChange}/>
@@ -37,8 +36,10 @@ export default function Dashboard() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    flexDirection: "row",
     backgroundColor: '#A7D9A3',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',
   },
   button: {
