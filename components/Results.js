@@ -14,7 +14,7 @@ export default function Results({data}) {
 
   return(
         <Card style={styles.container}>
-            <Card.Title 
+            <Card.Title
             title={commonName}
             subtitle={plant}/>
             <Card.Content>
