@@ -53,3 +53,6 @@ buck-out/
 .expo/
 web-build/
 dist/
+
+#environmental variables
+API_KEY.js
