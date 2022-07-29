@@ -72,7 +72,7 @@ export default function Dashboard() {
               <View style={styles.buttonContainer}>
                 <PickImage handleChange={handleChange}/>
                 <TakePicture handleChange={handleChange}/>
-                <Button onPress={() => handleSubmit(imageUris)} title="Submit"/>
+                <Button style={styles.neilsButton} onPress={() => handleSubmit(imageUris)} title="Submit"/>
               </View>
             </View>
       </View>
@@ -102,7 +102,18 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    marginBottom: 5,
+    marginBottom: 1,
+  },
+  neilsButton: {
+    flexDirection: "row",
+    elevation: 5,
+    height: 75,
+    width: 200,
+    borderRadius: 5,
+    color: '#8C8C8C',
+    backgroundColor: '#E4E4E4',
+    margin: 5,
+    marginBottom: 1,
   },
   button: {
     color: "#fff",
@@ -111,3 +122,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   }
 })
+

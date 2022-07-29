@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     color: '#8C8C8C',
     backgroundColor: '#E4E4E4',
     margin: 5,
-    marginBottom: 50,
+    marginBottom: 1,
   },
   thumbnail: {
     height: 200,
