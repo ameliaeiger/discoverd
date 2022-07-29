@@ -21,6 +21,7 @@ export default function Dashboard() {
   const [resultsCards, setResultsCards] = useState("")
   const allResultsCards = makeArray(suggestions)
 
+
   const getView = (uri) => {
     createImageComponents([...allImages, <PlantImage uri={uri}/>])
   }
@@ -41,7 +42,8 @@ export default function Dashboard() {
                             'name_authority',
                             'wiki_description',
                             'taxonomy',
-                            'synonyms'],
+                            'synonyms',
+                            'wiki_image'],
       }
 
       fetch('https://api.plant.id/v2/identify', {
@@ -54,7 +56,7 @@ export default function Dashboard() {
        })
        .then(response => response.json())
        .then(result => {
-         
+         setSuggestions(result.suggestions)
          console.log('Success:', result);
        })
        .catch((error) => {
