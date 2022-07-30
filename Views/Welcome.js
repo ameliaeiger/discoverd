@@ -1,9 +1,17 @@
 import * as React from "react"
 import { StyleSheet, View } from "react-native"
 import { Text } from "react-native-paper"
+import { useFonts } from "expo-font"
 
 export default function Welcome() {
     console.log("welcome component")
+    const [loaded] = useFonts({
+        Poppins: require('../assets/poppinsLight.ttf'),
+      })
+      
+      if (!loaded) {
+        return null
+      }
 
     const handleClick = (e) => {
       e.preventDefault()
@@ -31,7 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    // fontFamily: "Georgia",
+    fontFamily: "Poppins",
     fontSize: 30,
   },
   button: {
