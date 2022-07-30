@@ -37,7 +37,6 @@ export default function App() {
   function WelcomeScreen({ navigation }) {
     return (
         <Welcome navigation={navigation} />
-      </View>
 )}
 
   function HomeScreen({ navigation }) {
