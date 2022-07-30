@@ -17,7 +17,6 @@ import PlantImage from './components/ImageDisplay/PlantImage'
 // import TakePicture from "../components/TakePicture/TakePicture"
 import Data from "./Views/data.js"
 import Logo from "./assets/Logo.png"
-import Data2 from './Views/data2';
 
 
 export default function App() {
@@ -37,17 +36,7 @@ export default function App() {
 
   function WelcomeScreen({ navigation }) {
     return (
-      <View>
-        <Welcome />
-        <Button
-        style={styles.button}
-        icon="camera"
-        mode="contained"
-        onPress={() => {
-          navigation.navigate("home")}}
-        >Get started!
-        </Button>
-      </View>
+        <Welcome navigation={navigation} />
 )}
 
   function HomeScreen({ navigation }) {
@@ -66,6 +55,25 @@ export default function App() {
           />
         </View>
     )
+  }
+
+  function ResponseScreen() {
+    return(
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <ScrollView style={styles.scrollView}>
+          {allResultsCards}
+        </ScrollView>
+      </View>
+    )
+  }
+
+  function HeaderLogo() {
+    return (
+      <Image
+        style={{ width: 190, height: 50 }}
+        source={Logo}
+      />
+    );
   }
 
   return (
