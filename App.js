@@ -69,14 +69,7 @@ export default function App() {
   function WelcomeScreen({ navigation }) {
     return (
       <View>
-        <Welcome />
-        <Button
-        style={styles.button}
-        mode="contained"
-        onPress={event => {
-          navigation.navigate("home")}}
-        >Get started!
-        </Button>
+        <Welcome navigation={navigation} />
       </View>
 )}
 
