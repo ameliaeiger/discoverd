@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Image } from 'react-native';
 import { Button } from "react-native-paper"
 import Dashboard from "./Views/Dashboard";
 import Welcome from './Views/Welcome';
@@ -15,6 +15,7 @@ import PlantImage from './components/ImageDisplay/PlantImage'
 // import PickImage from "../components/PickImage/PickImage"
 // import TakePicture from "../components/TakePicture/TakePicture"
 import Data from "./Views/data.js"
+import Logo from "./assets/Logo.png"
 
 
 export default function App() {
@@ -106,10 +107,31 @@ export default function App() {
       </View>
     )
   }
+
+  function HeaderLogo() {
+    return (
+      <Image
+        style={{ width: 190, height: 50 }}
+        source={Logo}
+      />
+    );
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="welcome" component={WelcomeScreen} />
+        <Stack.Screen 
+          name="welcome" 
+          options={{
+            headerTitle:() => <HeaderLogo />,
+            headerStyle: {
+              backgroundColor: "green",
+            },
+            headerTintColor: "white",
+            headerTitleStye: {
+              fontWeight: "bold"
+            }
+          }} 
+          component={WelcomeScreen} />
         <Stack.Screen name="home" component={HomeScreen} />
         <Stack.Screen name="responseScreen" component={ResponseScreen} />
       </Stack.Navigator>
