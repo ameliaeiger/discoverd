@@ -6,7 +6,6 @@ import Results from './components/Results';
 import {NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {API_KEY} from "./API_KEY.js"
-
 import PickImage from "./components/PickImage/PickImage"
 import TakePicture from "./components/TakePicture/TakePicture"
 import PlantImage from './components/ImageDisplay/PlantImage'
@@ -22,14 +21,14 @@ export default function App() {
   const [suggestions, setSuggestions] = useState(Data().suggestions)
   const [resultsCards, setResultsCards] = useState("")
   const allResultsCards = makeArray(suggestions)
-  
+
   const Stack = createNativeStackNavigator();
-  
+
   const getView = (uri) => {
     createImageComponents([...allImages, <PlantImage uri={uri}/>])
   }
-  const handleChange = (uri) => {
-    addImageUris(imageUris => [...imageUris, uri])
+  const handleChange = (stringInfo, uri) => {
+    addImageUris(imageUris => [...imageUris, stringInfo])
     getView(uri)
   }
 
@@ -46,7 +45,6 @@ export default function App() {
                             'synonyms',
                             'wiki_image'],
       }
-
       fetch('https://api.plant.id/v2/identify', {
          method: 'POST',
          headers: {
@@ -74,13 +72,13 @@ export default function App() {
           onPress={() => {
             handleSubmit(imageUris)
             navigation.navigate("responseScreen")
-            
+
           }}
           />
         </View>
     )
   }
-  
+
   function ResponseScreen() {
     return(
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

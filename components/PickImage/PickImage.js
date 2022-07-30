@@ -20,12 +20,12 @@ export default function PickImage({handleChange}) {
         return
       }
 
-      let pickerResult = await ImagePicker.launchImageLibraryAsync()
+      let pickerResult = await ImagePicker.launchImageLibraryAsync({base64: true})
       if(pickerResult.cancelled) {
         return
       }
       setUri(pickerResult.uri)
-      handleChange(pickerResult.uri)
+      handleChange(pickerResult.base64, pickerResult.uri)
       }
   return (
       <Button

@@ -17,12 +17,12 @@ export default function TakePicture({handleChange}) {
       alert('Access to the camera is required for the app to function as intended')
       return
     }
-    let imageResult = await ImagePicker.launchCameraAsync()
+    let imageResult = await ImagePicker.launchCameraAsync({base64: true})
     if(imageResult.cancelled) {
       return
     }
     setUri(imageResult.uri)
-    handleChange(imageResult.uri)
+    handleChange(imageResult.base64,imageResult.uri)
 }
   return (
       <Button
