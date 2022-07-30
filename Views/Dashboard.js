@@ -30,17 +30,6 @@ export default function Dashboard({ handleChange, allImages }) {
   )
 }
 
-const makeArray = (array) => {
-  let emptyArray = []
-  array.forEach(suggestion => {
-    emptyArray.push(
-      <Results
-      data={suggestion}/>
-      )
-  })
-  return emptyArray
-}
-
 const styles = StyleSheet.create({
   scrollView: {
     maxHeight: 500,
