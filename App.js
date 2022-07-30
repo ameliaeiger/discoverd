@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, View, Text, Button, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { Button } from "react-native-paper"
 import Dashboard from "./Views/Dashboard";
+import Welcome from './Views/Welcome';
 import Results from './components/Results';
 import {NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -65,6 +67,22 @@ export default function App() {
        });
   }
 
+  function WelcomeScreen({ navigation }) {
+    return (
+      <View>
+        <Welcome />
+        <Button
+        style={styles.button}
+        icon="camera"
+        mode="contained"
+        onPress={event => {
+          console.log(event)
+          navigation.navigate("home")}}
+        >Get started!
+        </Button>
+      </View>
+)}
+
   function HomeScreen({ navigation }) {
     return(
         <View style={styles.container}>
@@ -93,6 +111,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="welcome" component={WelcomeScreen} />
         <Stack.Screen name="home" component={HomeScreen} />
         <Stack.Screen name="responseScreen" component={ResponseScreen} />
       </Stack.Navigator>
@@ -110,6 +129,13 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     maxHeight: 500,
+  },
+  button: {
+    backgroundColor: "green",
+    justifyContent: "center",
+    height: 40,
+    width: 200,
+    fontSize: 30,
   },
 })
 
