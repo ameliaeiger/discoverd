@@ -22,7 +22,7 @@ export default function TakePicture({handleChange}) {
       return
     }
     setUri(imageResult.uri)
-    handleChange(imageResult.uri)
+    handleChange(imageResult.base64,imageResult.uri)
 }
   return (
       <Button
