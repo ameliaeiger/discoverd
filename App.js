@@ -72,10 +72,8 @@ export default function App() {
         <Welcome />
         <Button
         style={styles.button}
-        icon="camera"
         mode="contained"
         onPress={event => {
-          console.log(event)
           navigation.navigate("home")}}
         >Get started!
         </Button>
@@ -124,7 +122,7 @@ export default function App() {
           options={{
             headerTitle:() => <HeaderLogo />,
             headerStyle: {
-              backgroundColor: "green",
+              backgroundColor: "#82E0AA",
             },
             headerTintColor: "white",
             headerTitleStye: {
@@ -151,7 +149,7 @@ const styles = StyleSheet.create({
     maxHeight: 500,
   },
   button: {
-    backgroundColor: "green",
+    backgroundColor: "#82E0AA",
     justifyContent: "center",
     height: 40,
     width: 200,

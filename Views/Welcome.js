@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    // fontFamily: "courier new",
+    // fontFamily: "Georgia",
     fontSize: 30,
   },
   button: {
