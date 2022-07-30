@@ -8,6 +8,7 @@ import Results from './components/Results';
 import {NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {API_KEY} from "./API_KEY.js"
+import ResponsePage from './Views/ResponsePage';
 import PickImage from "./components/PickImage/PickImage"
 import TakePicture from "./components/TakePicture/TakePicture"
 import PlantImage from './components/ImageDisplay/PlantImage'
@@ -16,60 +17,36 @@ import PlantImage from './components/ImageDisplay/PlantImage'
 // import TakePicture from "../components/TakePicture/TakePicture"
 import Data from "./Views/data.js"
 import Logo from "./assets/Logo.png"
+import Data2 from './Views/data2';
 
 
 export default function App() {
   const [imageUris, addImageUris] = useState([])
   const [allImages, createImageComponents] = useState([])
-  const [suggestions, setSuggestions] = useState(Data().suggestions)
-  const [resultsCards, setResultsCards] = useState("")
-  const allResultsCards = makeArray(suggestions)
+
 
   const Stack = createNativeStackNavigator();
 
   const getView = (uri) => {
-    createImageComponents([...allImages, <PlantImage uri={uri}/>])
+    createImageComponents([...allImages, <PlantImage key={uri} uri={uri}/>])
   }
   const handleChange = (stringInfo, uri) => {
     addImageUris(imageUris => [...imageUris, stringInfo])
     getView(uri)
   }
 
-  const handleSubmit = (uri) => {
-    const data = {
-        api_key: API_KEY,
-        images: [uri[0]],
-        plant_language: 'en',
-            plant_details: ['common_names',
-                            'url',
-                            'name_authority',
-                            'wiki_description',
-                            'taxonomy',
-                            'synonyms',
-                            'wiki_image'],
-      }
-      fetch('https://api.plant.id/v2/identify', {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-            "Api-Key": API_KEY,
-         },
-         body: JSON.stringify(data),
-       })
-       .then(response => response.json())
-       .then(result => {
-         setSuggestions(result.suggestions)
-         console.log('Success:', result);
-       })
-       .catch((error) => {
-         console.error('Error:', error);
-       });
-  }
-
   function WelcomeScreen({ navigation }) {
     return (
       <View>
-        <Welcome navigation={navigation} />
+        <Welcome />
+        <Button
+        style={styles.button}
+        icon="camera"
+        mode="contained"
+        onPress={() => {
+          navigation.navigate("home")}}
+        >Get started!
+        </Button>
       </View>
 )}
 
@@ -80,8 +57,10 @@ export default function App() {
           <StatusBar style="auto" />
           <Button title="Go to Response"
           onPress={() => {
-            handleSubmit(imageUris)
-            navigation.navigate("responseScreen")
+            navigation.navigate("responsePage", {
+                uris:imageUris,
+              }
+            )
 
           }}
           />
@@ -89,24 +68,6 @@ export default function App() {
     )
   }
 
-  function ResponseScreen() {
-    return(
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <ScrollView style={styles.scrollView}>
-          {allResultsCards}
-        </ScrollView>
-      </View>
-    )
-  }
-
-  function HeaderLogo() {
-    return (
-      <Image
-        style={{ width: 190, height: 50 }}
-        source={Logo}
-      />
-    );
-  }
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -124,7 +85,7 @@ export default function App() {
           }} 
           component={WelcomeScreen} />
         <Stack.Screen name="home" component={HomeScreen} />
-        <Stack.Screen name="responseScreen" component={ResponseScreen} />
+        <Stack.Screen name="responsePage" component={ResponsePage} />
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -149,14 +110,3 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
 })
-
-const makeArray = (array) => {
-  let emptyArray = []
-  array.forEach(suggestion => {
-    emptyArray.push(
-      <Results
-      data={suggestion}/>
-      )
-  })
-  return emptyArray
-}
