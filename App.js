@@ -5,7 +5,8 @@ import Dashboard from "./Views/Dashboard";
 import Results from './components/Results';
 import {NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {API_KEY} from "./API_KEY.js"
+// import {API_KEY} from "./API_KEY.js"
+import config from "./config.js"
 
 import PickImage from "./components/PickImage/PickImage"
 import TakePicture from "./components/TakePicture/TakePicture"
@@ -17,6 +18,10 @@ import Data from "./Views/data.js"
 
 
 export default function App() {
+  console.log(config)
+  const mykey = config.MY_API_TOKEN
+  const secretkey = config.SECRET_KEY
+  console.log(mykey, secretkey)
   const [imageUris, addImageUris] = useState([])
   const [allImages, createImageComponents] = useState([])
   const [suggestions, setSuggestions] = useState(Data().suggestions)
@@ -35,7 +40,7 @@ export default function App() {
 
   const handleSubmit = (uri) => {
     const data = {
-        api_key: API_KEY,
+        api_key: mykey,
         images: [uri[0]],
         plant_language: 'en',
             plant_details: ['common_names',
@@ -51,7 +56,7 @@ export default function App() {
          method: 'POST',
          headers: {
            'Content-Type': 'application/json',
-            "Api-Key": API_KEY,
+            "Api-Key": mykey,
          },
          body: JSON.stringify(data),
        })
@@ -72,7 +77,7 @@ export default function App() {
           <StatusBar style="auto" />
           <Button title="Go to Response"
           onPress={() => {
-            handleSubmit(imageUris)
+            // handleSubmit(imageUris)
             navigation.navigate("responseScreen")
             
           }}
