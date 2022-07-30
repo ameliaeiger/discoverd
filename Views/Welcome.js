@@ -1,44 +1,59 @@
 import * as React from "react"
-import { StyleSheet, View } from "react-native"
-import { Text } from "react-native-paper"
+import { StyleSheet, View, Dimensions } from "react-native"
+import { Text, Button } from "react-native-paper"
+import { useFonts } from "expo-font"
+import { useState, useEffect } from "react"
+import { NavigationContainer} from "@react-navigation/native"
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function Welcome() {
+export default function Welcome({ navigation }) {
     console.log("welcome component")
+    const screenDimensions = Dimensions. get('window')
+    const [height, setHeight] = useState(screenDimensions.height)
+    const [width, setWidth] = useState(screenDimensions.width)
 
-    const handleClick = (e) => {
-      e.preventDefault()
-      console.log("button pressed")
-    //   Linking.openURL("http://localhost:19006/dashboard")
-    }
-
+    const [loaded] = useFonts({
+        Poppins: require('../assets/poppinsLight.ttf'),
+      })
+      if (!loaded) {
+        return null
+      }
   return (
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.text}>
+      <View style={{
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        height: height,
+      }}>
+          <Text style={styles.headerText}>
               Welcome! 🌿
           </Text>
-          <Text style={styles.text}>
+          <Text height={height} style={styles.text}>
             discoverd is a tool to help you identify the plant life around you.
           </Text>
-        </View>
+          <Button
+        mode="contained"
+        onPress={() => navigation.navigate("home")}
+        >Get started!
+        </Button>
       </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    justifyContent: 'center',
+  headerText: {
+    fontFamily: "Poppins",
+    fontSize: 30,
   },
   text: {
-    // fontFamily: "courier new",
-    fontSize: 30,
-  },
-  button: {
-    backgroundColor: "green",
-    justifyContent: "center",
-    height: 40,
-    width: 200,
-    fontSize: 30,
+    fontFamily: "Poppins",
+    fontSize: 20,
   },
 })
+
+{/* <Button
+style={styles.button}
+mode="contained"
+onPress={event => {
+  navigation.navigate("home")}}
+>Get started!
+</Button> */}
