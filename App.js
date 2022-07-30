@@ -6,8 +6,7 @@ import Results from './components/Results';
 import {NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {API_KEY} from "./API_KEY.js"
-import { Base64 } from 'base64-string'
-
+import imageToBase64 from 'image-to-base64/browser'
 import PickImage from "./components/PickImage/PickImage"
 import TakePicture from "./components/TakePicture/TakePicture"
 import PlantImage from './components/ImageDisplay/PlantImage'
@@ -29,11 +28,8 @@ export default function App() {
   const getView = (uri) => {
     createImageComponents([...allImages, <PlantImage uri={uri}/>])
   }
-  const handleChange = (uri) => {
-    let enc = new Base64()
-    let stringified = enc.urlEncode(uri)
-    console.log('stringified', stringified)
-    addImageUris(imageUris => [...imageUris, stringified])
+  const handleChange = (stringInfo, uri) => {
+    addImageUris(imageUris => [...imageUris, stringInfo])
     getView(uri)
   }
 
@@ -50,7 +46,6 @@ export default function App() {
                             'synonyms',
                             'wiki_image'],
       }
-      console.log('post object', data)
       fetch('https://api.plant.id/v2/identify', {
          method: 'POST',
          headers: {
@@ -76,7 +71,6 @@ export default function App() {
           <StatusBar style="auto" />
           <Button title="Go to Response"
           onPress={() => {
-            console.log('images in submit',imageUris)
             handleSubmit(imageUris)
             navigation.navigate("responseScreen")
 
