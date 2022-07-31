@@ -24,7 +24,7 @@ export default function Welcome({ navigation, dimensions }) {
           <Text testID='Greeting' accessibilityLabel='Welcome with leaf' style={styles.headerText}>
               Welcome! 🌿
           </Text>
-          <Text testID='Greeting-Info' accessibilityLabel='Info about app' height={height} style={styles.text}>
+          <Text testID='Greeting-Info' accessibilityLabel='Info about app' style={styles.text}>
             discoverd is a tool to help you identify the plant life around you.
           </Text>
           <Button
@@ -49,5 +49,3 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 })
-
-
