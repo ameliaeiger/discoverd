@@ -29,7 +29,8 @@
     "react-router-native": "^6.3.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "cypress": "^10.3.1"
   },
   "private": true
 }

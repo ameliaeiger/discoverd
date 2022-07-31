@@ -70,8 +70,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen 
-          name="welcome" 
+        <Stack.Screen
+          name="welcome"
           options={{
             headerTitle:() => <HeaderLogo />,
             headerStyle: {
@@ -81,7 +81,7 @@ export default function App() {
             headerTitleStye: {
               fontWeight: "bold"
             }
-          }} 
+          }}
           component={WelcomeScreen} />
         <Stack.Screen name="home" component={HomeScreen} />
         <Stack.Screen name="responsePage" component={ResponsePage} />

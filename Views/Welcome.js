@@ -14,20 +14,22 @@ export default function Welcome({ navigation, dimensions }) {
       if (!loaded) {
         return <Text>loading</Text>
       }
-    return (
-      <View style={{
+  return (
+      <View testID='Welcome-Page' accessibilityLabel='Welcome Page' style={{
         backgroundColor: 'white',
         justifyContent: 'center',
         height: dimensions.height,
         width: dimensions.width,
       }}>
-          <Text style={styles.headerText}>
+          <Text testID='Greeting' accessibilityLabel='Welcome with leaf' style={styles.headerText}>
               Welcome! 🌿
           </Text>
-          <Text style={styles.text}>
+          <Text testID='Greeting-Info' accessibilityLabel='Info about app' height={height} style={styles.text}>
             discoverd is a tool to help you identify the plant life around you.
           </Text>
           <Button
+        testID='Nav-Button-Dashboard'
+        accessibilityLabel='Button To Dashboard'
         mode="contained"
         color="green"
         onPress={() => navigation.navigate("home")}
@@ -47,3 +49,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 })
+
+

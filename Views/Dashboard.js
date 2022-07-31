@@ -52,12 +52,13 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
 
 
   return (
-    <View style={{
+
+    <View testID='Dashboard' accessibilityLabel='Dashboard' style={{
       width: dimensions.width,
       maxHeight: dimensions.height,
       }}>
         {!hasImages ? displayText() : displayImages()}
-      <View style={styles.buttonContainer}>
+      <View testID='Button-Container' accessibilityLabel='Button Container' style={styles.buttonContainer}>
         <View style={{flexDirection:"row"}}>
           <PickImage handleChange={handleChange}/>
           <TakePicture handleChange={handleChange}/>
@@ -65,6 +66,8 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
       </View>
       <View style={styles.buttonContainer}>
           <Button 
+          testID='Response-Button'
+          accessibilityLabel='Check Possible Plant'
           style={styles.submitButton}
           title="Go to Response"
           // type="contain"
