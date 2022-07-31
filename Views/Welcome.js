@@ -19,18 +19,20 @@ export default function Welcome({ navigation }) {
         return null
       }
   return (
-      <View style={{
+      <View testID='Welcome-Page' accessibilityLabel='Welcome Page' style={{
         backgroundColor: 'white',
         justifyContent: 'center',
         height: height,
       }}>
-          <Text style={styles.headerText}>
+          <Text testID='Greeting' accessibilityLabel='Welcome with leaf' style={styles.headerText}>
               Welcome! 🌿
           </Text>
-          <Text height={height} style={styles.text}>
+          <Text testID='Greeting-Info' accessibilityLabel='Info about app' height={height} style={styles.text}>
             discoverd is a tool to help you identify the plant life around you.
           </Text>
           <Button
+        testID='Nav-Button-Dashboard'
+        accessibilityLabel='Button To Dashboard'
         mode="contained"
         onPress={() => navigation.navigate("home")}
         >Get started!

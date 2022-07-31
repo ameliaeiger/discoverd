@@ -16,12 +16,12 @@ import Data from "./data.js"
 
 export default function Dashboard({ handleChange, allImages }) {
   return (
-      <View style={styles.view}>
+      <View testID='Dashboard' accessibilityLabel='Dashboard' style={styles.view}>
             <View style={styles.container}>
-            <ScrollView >
+            <ScrollView testID='Displayed-Images' accessibilityLabel='Displayed Images'>
               {allImages}
             </ScrollView>
-              <View style={styles.buttonContainer}>
+              <View testID='Button-Container' accessibilityLabel='Button Container' style={styles.buttonContainer}>
                 <PickImage handleChange={handleChange}/>
                 <TakePicture handleChange={handleChange}/>
               </View>
