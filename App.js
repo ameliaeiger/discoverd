@@ -44,7 +44,10 @@ export default function App() {
         <View style={styles.container}>
           <Dashboard handleChange={handleChange} allImages={allImages}/>
           <StatusBar style="auto" />
-          <Button title="Go to Response"
+          <Button
+          testID='Response-Button'
+          accessibilityLabel='Check Possible Plant'
+          title="Go to Response"
           onPress={() => {
             navigation.navigate("responsePage", {
                 uris:imageUris,
@@ -79,8 +82,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen 
-          name="welcome" 
+        <Stack.Screen
+          name="welcome"
           options={{
             headerTitle:() => <HeaderLogo />,
             headerStyle: {
@@ -90,7 +93,7 @@ export default function App() {
             headerTitleStye: {
               fontWeight: "bold"
             }
-          }} 
+          }}
           component={WelcomeScreen} />
         <Stack.Screen name="home" component={HomeScreen} />
         <Stack.Screen name="responsePage" component={ResponsePage} />

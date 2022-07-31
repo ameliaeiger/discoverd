@@ -1,7 +1,6 @@
 describe('Weclome Page', () => {
   beforeEach('The user should see the welcome page', () => {
     cy.visit('http://localhost:19006/Welcome')
-
   })
 
   it('Should allow user to see a welcome page', () => {

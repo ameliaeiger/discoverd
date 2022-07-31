@@ -26,6 +26,8 @@ export default function TakePicture({handleChange}) {
 }
   return (
       <Button
+        testID='Take-Picture'
+        accessibilityLabel='Take Picture'
         onPress={openCameraAsync}
         icon="camera"
         mode="contained"
