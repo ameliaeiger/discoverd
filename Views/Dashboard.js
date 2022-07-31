@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import {API_KEY} from "../API_KEY.js"
 
@@ -9,56 +9,102 @@ import { Button } from 'react-native-paper'
 import PickImage from "../components/PickImage/PickImage"
 import TakePicture from "../components/TakePicture/TakePicture"
 import PlantImage from '../components/ImageDisplay/PlantImage'
-
+import { useFonts } from "expo-font"
 import Results from "../components/Results"
 import Data from "./data.js"
+import * as Haptics from 'expo-haptics';
 
 
-export default function Dashboard({ handleChange, allImages }) {
-  return (
-      <View style={styles.view}>
-            <View style={styles.container}>
-            <ScrollView >
-              {allImages}
-            </ScrollView>
-              <View style={styles.buttonContainer}>
-                <PickImage handleChange={handleChange}/>
-                <TakePicture handleChange={handleChange}/>
-              </View>
-            </View>
+export default function Dashboard({ navigation, handleChange, allImages, images, dimensions }) {
+  const [hasImages, setHasImages] = useState("")
+
+  useEffect(() => {
+    if (!allImages[0]){
+      setHasImages(false)
+      console.log(hasImages)
+      return
+    } else if (allImages){
+      setHasImages(true)
+      console.log(hasImages)
+      return
+    }
+  },[hasImages])
+
+  const displayText = () => {
+    return (
+      <View style={{width: dimensions.width,
+        height: 400, maxHeight: 400, backgroundColor:"white", borderTopWidth:10, borderBottomWidth:10, borderColor:"green", justifyContent:"center", alignItems:"center", color:"grey"}}>
+        <Text style={styles.displayText}>
+          Upload an image to get started
+        </Text>
       </View>
+    )
+  }
+
+  const displayImages = () => {
+    return (
+      <ScrollView horizontal={true} contentContainerStyle={{justifyContent:"center", alignItems:"center"}} style={{width: dimensions.width,
+        height: 400, maxHeight:400, enum:"black", backgroundColor:"white", borderTopWidth:10, borderBottomWidth:10, borderColor:"green"}}>
+            {allImages}
+      </ScrollView>
+    )
+  }
+
+
+  return (
+    <View style={{
+      width: dimensions.width,
+      maxHeight: dimensions.height,
+      }}>
+        {!hasImages ? displayText() : displayImages()}
+      <View style={styles.buttonContainer}>
+        <View style={{flexDirection:"row"}}>
+          <PickImage handleChange={handleChange}/>
+          <TakePicture handleChange={handleChange}/>
+        </View>
+      </View>
+      <View style={styles.buttonContainer}>
+          <Button 
+          style={styles.submitButton}
+          title="Go to Response"
+          // type="contain"
+          icon="alarm-light-outline"
+          color="white"
+          onPress={() => {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+            .catch(error => {
+              return
+            })
+            navigation.navigate("responsePage", {
+            uris:images,
+            })
+          }}> Discover!
+          </Button>
+        </View>
+  </View>
   )
 }
 
 const styles = StyleSheet.create({
   scrollView: {
-    maxHeight: 500,
+    transform: [{scaleX: -1}],
   },
-  container: {
-    flexDirection: "column",
-    backgroundColor: '#A7D9A3',
-    justifyContent: 'center',
-    alignItems: "center",
+  submitButton: {
+    elevation: 5,
+    fontSize: 40,
+    height: 150, 
+    width: 250, 
+    borderRadius: 5,
+    margin: 5,
+    backgroundColor:"green",
+    justifyContent: "center",
   },
   buttonContainer: {
-    flexDirection: "row",
-    marginBottom: 1,
-  },
-  neilsButton: {
-    flexDirection: "row",
-    elevation: 5,
-    height: 75,
-    width: 200,
-    borderRadius: 5,
-    color: '#8C8C8C',
-    backgroundColor: '#E4E4E4',
-    margin: 5,
-    marginBottom: 1,
-  },
-  button: {
-    color: "#fff",
-    backgroundColor: "#2EC17E",
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    height: "20%",
+  },
+  displayText: {
+    fontFamily: "Poppins"
   }
 })
