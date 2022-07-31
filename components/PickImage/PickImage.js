@@ -29,6 +29,8 @@ export default function PickImage({handleChange}) {
       }
   return (
       <Button
+        testID='Upload-Image'
+        accessibilityLabel='Upload Image'
         onPress={openImagePickerAsync}
         icon="camera"
         mode="contained"

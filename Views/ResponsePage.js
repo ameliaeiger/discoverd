@@ -59,7 +59,7 @@ export default function ResponsePage({ route, navigation }) {
   }
 
   useEffect(() => {
-    // handleSubmit(uris)
+    handleSubmit(uris)
       setTimeout(() => {
         setSuggestions(Data2().suggestions)
         console.log("done responsepage 66", suggestions)

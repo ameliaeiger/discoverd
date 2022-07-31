@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, View, Text, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Image, Dimensions } from 'react-native';
 import { Button } from "react-native-paper"
 import Dashboard from "./Views/Dashboard";
 import Welcome from './Views/Welcome';
@@ -8,22 +8,25 @@ import Results from './components/Results';
 import {NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {API_KEY} from "./API_KEY.js"
-import ResponsePage from './Views/ResponsePage';
+import ResponsePage from './Views/ResponsePage'
 import PickImage from "./components/PickImage/PickImage"
 import TakePicture from "./components/TakePicture/TakePicture"
 import PlantImage from './components/ImageDisplay/PlantImage'
+import HeaderLogo from './components/Header'
+import { useFonts } from "expo-font"
 // ---------------- libraries ---------------- //
 // import PickImage from "../components/PickImage/PickImage"
 // import TakePicture from "../components/TakePicture/TakePicture"
-import Data from "./Views/data.js"
-import Logo from "./assets/Logo.png"
+// import Data from "./Views/data.js"
+// import Logo from "./assets/Logo.png"
+
 
 
 export default function App() {
   const [imageUris, addImageUris] = useState([])
   const [allImages, createImageComponents] = useState([])
 
-
+  const windowDimensions = Dimensions. get('window')
   const Stack = createNativeStackNavigator();
 
   const getView = (uri) => {
@@ -36,23 +39,20 @@ export default function App() {
 
   function WelcomeScreen({ navigation }) {
     return (
-        <Welcome navigation={navigation} />
+        <Welcome 
+          navigation={navigation}
+          dimensions={windowDimensions} />
 )}
 
   function HomeScreen({ navigation }) {
     return(
-        <View style={styles.container}>
-          <Dashboard handleChange={handleChange} allImages={allImages}/>
+        <View style={{
+          backgroundColor: '#A7D9A3',
+          height: windowDimensions.height,
+          alignContent: "stretch",
+        }}>
+          <Dashboard handleChange={handleChange} allImages={allImages} navigation={navigation} images={imageUris} dimensions={windowDimensions}/>
           <StatusBar style="auto" />
-          <Button title="Go to Response"
-          onPress={() => {
-            navigation.navigate("responsePage", {
-                uris:imageUris,
-              }
-            )
-
-          }}
-          />
         </View>
     )
   }
@@ -67,20 +67,11 @@ export default function App() {
     )
   }
 
-  function HeaderLogo() {
-    return (
-      <Image
-        style={{ width: 190, height: 50 }}
-        source={Logo}
-      />
-    );
-  }
-
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen 
-          name="welcome" 
+        <Stack.Screen
+          name="welcome"
           options={{
             headerTitle:() => <HeaderLogo />,
             headerStyle: {
@@ -90,7 +81,7 @@ export default function App() {
             headerTitleStye: {
               fontWeight: "bold"
             }
-          }} 
+          }}
           component={WelcomeScreen} />
         <Stack.Screen name="home" component={HomeScreen} />
         <Stack.Screen name="responsePage" component={ResponsePage} />
@@ -105,7 +96,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    border: "2px solid red",
   },
   scrollView: {
     maxHeight: 500,

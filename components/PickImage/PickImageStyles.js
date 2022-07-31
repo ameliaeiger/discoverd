@@ -2,12 +2,10 @@ import { StyleSheet} from 'react-native'
 
 export const styles = StyleSheet.create({
   container: {
-    flex:1,
     backgroundColor: '#A7D9A3',
     justifyContent: 'flex-end',
   },
   button: {
-    flexDirection: "row",
     elevation: 5,
     height: 75,
     width: 200,
@@ -16,10 +14,16 @@ export const styles = StyleSheet.create({
     backgroundColor: '#E4E4E4',
     margin: 5,
     marginBottom: 1,
+    justifyContent: "center",
   },
   thumbnail: {
-    height: 200,
-    width: 200,
-    resizeMode: 'contain'
+    height: 300,
+    width: 150,
+    padding: 0,
+    margin: 5,
+    borderRadius: 10,
+    borderWidth: 3,
+    borderColor: "black",
+    resizeMode: 'cover'
   }
 })
