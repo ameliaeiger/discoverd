@@ -6,32 +6,30 @@ import { useState, useEffect } from "react"
 import { NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function Welcome({ navigation }) {
+export default function Welcome({ navigation, dimensions }) {
     console.log("welcome component")
-    const screenDimensions = Dimensions. get('window')
-    const [height, setHeight] = useState(screenDimensions.height)
-    const [width, setWidth] = useState(screenDimensions.width)
-
     const [loaded] = useFonts({
         Poppins: require('../assets/poppinsLight.ttf'),
       })
       if (!loaded) {
-        return null
+        return <Text>loading</Text>
       }
-  return (
+    return (
       <View style={{
         backgroundColor: 'white',
         justifyContent: 'center',
-        height: height,
+        height: dimensions.height,
+        width: dimensions.width,
       }}>
           <Text style={styles.headerText}>
               Welcome! 🌿
           </Text>
-          <Text height={height} style={styles.text}>
+          <Text style={styles.text}>
             discoverd is a tool to help you identify the plant life around you.
           </Text>
           <Button
         mode="contained"
+        color="green"
         onPress={() => navigation.navigate("home")}
         >Get started!
         </Button>
@@ -49,11 +47,3 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 })
-
-{/* <Button
-style={styles.button}
-mode="contained"
-onPress={event => {
-  navigation.navigate("home")}}
->Get started!
-</Button> */}
