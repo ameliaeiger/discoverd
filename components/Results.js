@@ -11,21 +11,37 @@ export default function Results({data}) {
   const [plant, setPlant] = useState(data.plant_name)
   const [plantDetails, setPlantDetails] = useState(data.plant_details)
   const [commonName, setCommonName] = useState(plantDetails.common_names)
-
+  let plantImage
+console.log("plant details", plantDetails.wiki_image.value)
+  if(plantDetails.wiki_image.value) {
+    plantImage = (
+      <Image
+        testID="Plant-Image"
+        accessibilityLabel='Plant Image'
+        style={styles.image}
+        source={{
+        uri: plantDetails.wiki_image.value
+        }}
+      />)
+  } else {
+    plantImage = (
+      <Image
+        testID="Plant-Image"
+        accessibilityLabel='Plant Image'
+        style={styles.image}
+        source={{
+        uri: "https://demofree.sirv.com/nope-not-here.jpg"
+        }}
+      />
+    )
+  }
   return(
         <Card testID='Plant-Card' accessibilityLabel='Plant Card Info' style={styles.container}>
             <Card.Title testID="Plant-Name"
             title={commonName}
             subtitle={plant} />
             <Card.Content>
-            <Image
-                testID="Plant-Image"
-                accessibilityLabel='Plant Image'
-                style={styles.image}
-                source={{
-                uri: plantDetails.wiki_image.value
-                }}
-            />
+            {plantImage}
             <Paragraph
                 testID="Plant-Details"
                 accessibilityLabel="Plant Details"

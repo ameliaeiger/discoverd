@@ -7,7 +7,6 @@ import { NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function Welcome({ navigation, dimensions }) {
-    console.log("welcome component")
     const [loaded] = useFonts({
         Poppins: require('../assets/poppinsLight.ttf'),
       })
