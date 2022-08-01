@@ -11,7 +11,7 @@
     <key>EXUpdatesLaunchWaitMs</key>
     <integer>0</integer>
     <key>EXUpdatesURL</key>
-    <string>https://exp.host/@bluenealis/discoverd</string>
+    <string>https://exp.host/@discoverd/discoverd</string>
     <key>EXUpdatesReleaseChannel</key>
     <string>default</string>
   </dict>
