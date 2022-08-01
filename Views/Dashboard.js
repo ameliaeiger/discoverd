@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
-import {API_KEY} from "../API_KEY.js"
 
 //Libraries
 import * as ImagePicker from 'expo-image-picker'

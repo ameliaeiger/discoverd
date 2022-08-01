@@ -7,7 +7,6 @@ import Welcome from './Views/Welcome';
 import Results from './components/Results';
 import {NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {API_KEY} from "./API_KEY.js"
 import ResponsePage from './Views/ResponsePage'
 import PickImage from "./components/PickImage/PickImage"
 import TakePicture from "./components/TakePicture/TakePicture"

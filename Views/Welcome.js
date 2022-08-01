@@ -7,12 +7,17 @@ import { NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
+    const [key, setKey] = useState('')
     const [loaded] = useFonts({
         Poppins: require('../assets/poppinsLight.ttf'),
       })
       if (!loaded) {
         return <Text>loading</Text>
       }
+
+  const handleChange = (event) => {
+      }
+
   return (
       <View testID='Welcome-Page' accessibilityLabel='Welcome Page' style={{
         backgroundColor: 'white',
@@ -28,9 +33,9 @@ export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
           </Text>
           <Text style = {{color:'red'}}>*Required</Text>
           <TextInput
-          placeholder='Please input API key from Plant.ID'
-          value={apiKey}
-          onChangeText= {setApiKey}
+            placeholder='Please input API key from Plant.ID'
+            value={key}
+            onChangeText= {setKey}
           />
           <Button
         testID='Nav-Button-Dashboard'
@@ -38,9 +43,12 @@ export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
         mode="contained"
         color="green"
         onPress={() => {
-          if(!apiKey || apiKey.length < 50){
+          setApiKey(key)
+          console.log('apiKeyBefore', apiKey)
+          if(!key || key.length < 50){
+            console.log('apiKeyAfter', apiKey)
           return alert("Please Fill Out All Required Fields")
-          }
+        }
           navigation.navigate("home")
         }}
         >Get started!
