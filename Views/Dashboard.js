@@ -15,7 +15,7 @@ import Data from "./data.js"
 import * as Haptics from 'expo-haptics';
 
 
-export default function Dashboard({ navigation, handleChange, allImages, images, dimensions, deleteImage }) {
+export default function Dashboard({ navigation, handleChange, allImages, images, dimensions, deleteImage, apiKey }) {
   const [hasImages, setHasImages] = useState("")
 
   useEffect(() => {
@@ -62,20 +62,21 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
         </View>
       </View>
       <View style={styles.buttonContainer}>
-          <Button 
-          testID='Response-Button'
-          accessibilityLabel='Check Possible Plant'
-          style={styles.submitButton}
-          title="Go to Response"
-          // type="contain"
-          icon="alarm-light-outline"
-          color="white"
-          onPress={() => {
+          <Button
+            testID='Response-Button'
+            accessibilityLabel='Check Possible Plant'
+            style={styles.submitButton}
+            labelStyle={{fontSize:20, margin:0, alignItems:"center"}}
+            contentStyle={{justifyContent:"center", padding:20}}
+            title="Go to Response"
+            icon="alarm-light-outline"
+            color="white"
+            onPress={() => {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
             .catch(error => {
               return
             })
-            navigation.navigate("responsePage", {
+            navigation.navigate("responsePage", {apiKey: apiKey,
             uris:images,
             })
           }}> Discover!
@@ -90,14 +91,11 @@ const styles = StyleSheet.create({
     transform: [{scaleX: -1}],
   },
   submitButton: {
-    elevation: 5,
-    fontSize: 40,
-    height: 150, 
-    width: 250, 
+    elevation: 20,
     borderRadius: 5,
     margin: 5,
     backgroundColor:"green",
-    justifyContent: "center",
+    justifyContent:"center",
   },
   buttonContainer: {
     flexDirection: "column",
