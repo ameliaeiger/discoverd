@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
-import {API_KEY} from "../API_KEY.js"
 
 //Libraries
 import * as ImagePicker from 'expo-image-picker'
@@ -15,11 +14,11 @@ import Data from "./data.js"
 import Data2 from './data2.js';
 
 
-export default function ResponsePage({ route, navigation, apiKey }) {
+export default function ResponsePage({ route, navigation }) {
   const { uris } = route.params;
   const [suggestions, setSuggestions] = useState(Data().suggestions)
   const [resultsCards, setResultsCards] = useState([])
-
+  const { apiKey } = route.params;
   const handleSubmit = (uri) => {
     const data = {
         api_key: apiKey,
