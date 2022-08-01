@@ -60,8 +60,8 @@ export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
                 .catch(error => {
                   return
                 })
+                setApiKey(key)
                 if(!key || key.length < 50){
-                  setApiKey(key)
                   Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
                     .catch(error => {
                        return
