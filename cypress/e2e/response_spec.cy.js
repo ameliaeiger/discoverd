@@ -1,6 +1,7 @@
 describe('Response Page', () => {
   beforeEach('A User should be able to see the response page', () => {
     cy.visit('http://localhost:19006/Home')
+    cy.get('.css-textinput-11aywtz').type('QWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQ')
     cy.get('[data-testid=Nav-Button-Dashboard]')
     .click()
     cy.get('[data-testid=Response-Button]')
