@@ -1,14 +1,7 @@
-import { StatusBar } from 'expo-status-bar'
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, ScrollView } from 'react-native'
 
 //Libraries
-import * as ImagePicker from 'expo-image-picker'
-import { Button } from 'react-native-paper'
-import PickImage from "../components/PickImage/PickImage"
-import TakePicture from "../components/TakePicture/TakePicture"
-import PlantImage from '../components/ImageDisplay/PlantImage'
-
 import Results from "../components/Results"
 import Data from "./data.js"
 import Data2 from './data2.js';
