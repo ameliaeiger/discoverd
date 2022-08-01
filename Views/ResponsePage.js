@@ -93,7 +93,6 @@ if(errMessage) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <ScrollView style={styles.scrollView}>
         {resultsCards}
-        <Text>stuff</Text>
       </ScrollView>
     </View>
   )
