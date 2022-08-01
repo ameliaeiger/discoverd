@@ -13,11 +13,6 @@ import TakePicture from "./components/TakePicture/TakePicture"
 import PlantImage from './components/ImageDisplay/PlantImage'
 import HeaderLogo from './components/Header'
 import { useFonts } from "expo-font"
-// ---------------- libraries ---------------- //
-// import PickImage from "../components/PickImage/PickImage"
-// import TakePicture from "../components/TakePicture/TakePicture"
-// import Data from "./Views/data.js"
-// import Logo from "./assets/Logo.png"
 
 
 

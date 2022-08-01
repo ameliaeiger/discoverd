@@ -44,9 +44,7 @@ export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
         color="green"
         onPress={() => {
           setApiKey(key)
-          console.log('apiKeyBefore', apiKey)
           if(!key || key.length < 50){
-            console.log('apiKeyAfter', apiKey)
           return alert("Please Fill Out All Required Fields")
         }
           navigation.navigate("home")
