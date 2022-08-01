@@ -20,8 +20,9 @@ export default function ResponsePage({ route, navigation }) {
   const [resultsCards, setResultsCards] = useState([])
   const [errMessage, setErr] = useState(null)
   const { apiKey } = route.params;
-  const handleSubmit = (uri) => {
   
+  const handleSubmit = (uri) => {
+    console.log(apiKey)
     const data = {
         api_key: apiKey,
         images: [uri[0]],
@@ -42,6 +43,7 @@ export default function ResponsePage({ route, navigation }) {
          },
          body: JSON.stringify(data),
        })
+
        .then((response) => {
         if (!response.ok) {
           console.log(response);
@@ -59,6 +61,7 @@ export default function ResponsePage({ route, navigation }) {
   }
 
   const createResults = () => {
+
     if(!errMessage) {
       const resultsCardsArr = suggestions.map((suggestion) => {
             return <Results key={suggestion.id} data={suggestion}/>
@@ -93,10 +96,13 @@ if(errMessage) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <ScrollView style={styles.scrollView}>
         {resultsCards}
+
+
       </ScrollView>
     </View>
   )
 }
+
 }
 
 const styles = StyleSheet.create({
