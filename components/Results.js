@@ -12,48 +12,34 @@ export default function Results({data}) {
   const [plantDetails, setPlantDetails] = useState(data.plant_details)
   const [commonName, setCommonName] = useState(plantDetails.common_names)
   let plantImage
-console.log("plant details", plantDetails.wiki_image.value)
-  if(plantDetails.wiki_image.value) {
-    plantImage = (
-      <Image
-        testID="Plant-Image"
-        accessibilityLabel='Plant Image'
-        style={styles.image}
-        source={{
-        uri: plantDetails.wiki_image.value
-        }}
-      />)
-  } else {
-    plantImage = (
-      <Image
-        testID="Plant-Image"
-        accessibilityLabel='Plant Image'
-        style={styles.image}
-        source={{
-        uri: "https://demofree.sirv.com/nope-not-here.jpg"
-        }}
-      />
-    )
-  }
+console.log("plant details", plant)
+
   return(
         <Card testID='Plant-Card' accessibilityLabel='Plant Card Info' style={styles.container}>
             <Card.Title testID="Plant-Name"
             title={commonName}
             subtitle={plant} />
             <Card.Content>
-            {plantImage}
+            <Image
+              testID="Plant-Image"
+              accessibilityLabel='Plant Image'
+              style={styles.image}
+              source={{
+              uri: plantDetails?.wiki_image?.value || "https://demofree.sirv.com/nope-not-here.jpg"
+              }}
+            />
             <Paragraph
                 testID="Plant-Details"
                 accessibilityLabel="Plant Details"
                 style={styles.paragraph}>
-                {plantDetails.wiki_description.value}
+                {plantDetails?.wiki_description?.value}
             </Paragraph>
             <TouchableOpacity>
             <Button
               testID="Plant-URL"
               accessibilityLabel="button to more plant information"
               title="Find out more!"
-              onPress={() => Linking.openURL(plantDetails.url)}>
+              onPress={() => Linking.openURL(plantDetails?.url)}>
             </Button>
           </TouchableOpacity>
         </Card.Content>

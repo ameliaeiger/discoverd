@@ -21,7 +21,6 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
   useEffect(() => {
     if (!allImages[0]){
       setHasImages(false)
-      console.log(hasImages)
       return
     } else if (allImages){
       setHasImages(true)
