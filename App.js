@@ -7,24 +7,19 @@ import Welcome from './Views/Welcome';
 import Results from './components/Results';
 import {NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {API_KEY} from "./API_KEY.js"
 import ResponsePage from './Views/ResponsePage'
 import PickImage from "./components/PickImage/PickImage"
 import TakePicture from "./components/TakePicture/TakePicture"
 import PlantImage from './components/ImageDisplay/PlantImage'
 import HeaderLogo from './components/Header'
 import { useFonts } from "expo-font"
-// ---------------- libraries ---------------- //
-// import PickImage from "../components/PickImage/PickImage"
-// import TakePicture from "../components/TakePicture/TakePicture"
-// import Data from "./Views/data.js"
-// import Logo from "./assets/Logo.png"
 
 
 
 export default function App() {
   const [imageUris, addImageUris] = useState([])
   const [allImages, createImageComponents] = useState([])
+  const [apiKey, setApiKey] = useState('')
 
   const windowDimensions = Dimensions. get('window')
   const Stack = createNativeStackNavigator();
@@ -39,7 +34,9 @@ export default function App() {
 
   function WelcomeScreen({ navigation }) {
     return (
-        <Welcome 
+        <Welcome
+          apiKey = {apiKey}
+          setApiKey = {setApiKey}
           navigation={navigation}
           dimensions={windowDimensions} />
 )}
@@ -51,7 +48,7 @@ export default function App() {
           height: windowDimensions.height,
           alignContent: "stretch",
         }}>
-          <Dashboard handleChange={handleChange} allImages={allImages} navigation={navigation} images={imageUris} dimensions={windowDimensions}/>
+          <Dashboard handleChange={handleChange} apiKey={apiKey} allImages={allImages} navigation={navigation} images={imageUris} dimensions={windowDimensions}/>
           <StatusBar style="auto" />
         </View>
     )

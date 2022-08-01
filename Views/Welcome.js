@@ -1,18 +1,23 @@
 import * as React from "react"
-import { StyleSheet, View, Dimensions } from "react-native"
+import { StyleSheet, View, Dimensions, TextInput, Alert} from "react-native"
 import { Text, Button } from "react-native-paper"
 import { useFonts } from "expo-font"
 import { useState, useEffect } from "react"
 import { NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function Welcome({ navigation, dimensions }) {
+export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
+    const [key, setKey] = useState('')
     const [loaded] = useFonts({
         Poppins: require('../assets/poppinsLight.ttf'),
       })
       if (!loaded) {
         return <Text>loading</Text>
       }
+
+  const handleChange = (event) => {
+      }
+
   return (
       <View testID='Welcome-Page' accessibilityLabel='Welcome Page' style={{
         backgroundColor: 'white',
@@ -26,12 +31,24 @@ export default function Welcome({ navigation, dimensions }) {
           <Text testID='Greeting-Info' accessibilityLabel='Info about app' style={styles.text}>
             discoverd is a tool to help you identify the plant life around you.
           </Text>
+          <Text style = {{color:'red'}}>*Required</Text>
+          <TextInput
+            placeholder='Please input API key from Plant.ID'
+            value={key}
+            onChangeText= {setKey}
+          />
           <Button
         testID='Nav-Button-Dashboard'
         accessibilityLabel='Button To Dashboard'
         mode="contained"
         color="green"
-        onPress={() => navigation.navigate("home")}
+        onPress={() => {
+          setApiKey(key)
+          if(!key || key.length < 50){
+          return alert("Please Fill Out All Required Fields")
+        }
+          navigation.navigate("home")
+        }}
         >Get started!
         </Button>
       </View>

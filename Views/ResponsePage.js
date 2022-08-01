@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
-import {API_KEY} from "../API_KEY.js"
 
 //Libraries
 import * as ImagePicker from 'expo-image-picker'
@@ -20,10 +19,11 @@ export default function ResponsePage({ route, navigation }) {
   const [suggestions, setSuggestions] = useState(Data().suggestions)
   const [resultsCards, setResultsCards] = useState([])
   const [errMessage, setErr] = useState(null)
-
+  const { apiKey } = route.params;
   const handleSubmit = (uri) => {
+  
     const data = {
-        api_key: API_KEY,
+        api_key: apiKey,
         images: [uri[0]],
         plant_language: 'en',
             plant_details: ['common_names',
@@ -38,7 +38,7 @@ export default function ResponsePage({ route, navigation }) {
          method: 'POST',
          headers: {
            'Content-Type': 'application/json',
-            "Api-Key": API_KEY,
+            "Api-Key": apiKey,
          },
          body: JSON.stringify(data),
        })
