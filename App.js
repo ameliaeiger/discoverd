@@ -83,7 +83,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="welcome"
+          name="Welcome"
           options={{
             headerTitle:() => <HeaderLogo />,
             headerStyle: {

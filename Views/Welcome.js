@@ -4,8 +4,6 @@ import { Text, Button, TextInput } from "react-native-paper"
 import { useFonts } from "expo-font"
 import * as Haptics from 'expo-haptics';
 import { useState, useEffect } from "react"
-import { NavigationContainer} from "@react-navigation/native"
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
 
@@ -56,19 +54,19 @@ export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
               mode="contained"
               color="green"
               onPress={() => {
+                // if(!key || key.length < 50){
+                //   Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
+                //     .catch(error => {
+                //        return
+                //      })
+                //    return alert("Please fill out all required fields.")
+                //   }
                 Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
                 .catch(error => {
                   return
                 })
                 setApiKey(key)
-                if(!key || key.length < 50){
-                  Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
-                    .catch(error => {
-                       return
-                     })
-                   return alert("Please fill out all required fields")
-                  }
-                navigation.navigate("home")
+                navigation.navigate("Home")
               }}
             >Get started!
           </Button>

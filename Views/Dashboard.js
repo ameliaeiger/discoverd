@@ -1,20 +1,14 @@
-import { StatusBar } from 'expo-status-bar'
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, ScrollView } from 'react-native'
 
 //Libraries
-import * as ImagePicker from 'expo-image-picker'
 import { Button } from 'react-native-paper'
 import PickImage from "../components/PickImage/PickImage"
 import TakePicture from "../components/TakePicture/TakePicture"
-import PlantImage from '../components/ImageDisplay/PlantImage'
-import { useFonts } from "expo-font"
-import Results from "../components/Results"
-import Data from "./data.js"
 import * as Haptics from 'expo-haptics';
 
-
 export default function Dashboard({ navigation, handleChange, allImages, images, dimensions, deleteImage, apiKey }) {
+  
   const [hasImages, setHasImages] = useState("")
 
   useEffect(() => {
@@ -25,7 +19,7 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
       setHasImages(true)
       return
     }
-  },[hasImages])
+  },[])
 
   const displayText = () => {
     return (
@@ -47,7 +41,6 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
     )
   }
 
-
   return (
     <View testID='Dashboard' accessibilityLabel='Dashboard' style={{
       width: dimensions.width,
@@ -59,8 +52,7 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
           <PickImage handleChange={handleChange}/>
           <TakePicture handleChange={handleChange}/>
         </View>
-      </View>
-      <View style={styles.buttonContainer}>
+      <View>
           <Button
             testID='Response-Button'
             accessibilityLabel='Check Possible Plant'
@@ -75,12 +67,13 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
             .catch(error => {
               return
             })
-            navigation.navigate("responsePage", {apiKey: apiKey,
+            navigation.navigate("Results", {apiKey: apiKey,
             uris:images,
             })
           }}> discover
           </Button>
         </View>
+      </View>
   </View>
   )
 }
@@ -90,16 +83,17 @@ const styles = StyleSheet.create({
     transform: [{scaleX: -1}],
   },
   submitButton: {
-    elevation: 20,
+    elevation: 5,
     borderRadius: 5,
-    margin: 5,
+    marginTop: 50,
     backgroundColor:"green",
     justifyContent:"center",
   },
   buttonContainer: {
     flexDirection: "column",
     alignItems: "center",
-    height: "20%",
+    height: "40%",
+    padding:5,
   },
   displayText: {
     fontFamily: "Poppins"
