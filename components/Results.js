@@ -11,27 +11,35 @@ export default function Results({data}) {
   const [plant, setPlant] = useState(data.plant_name)
   const [plantDetails, setPlantDetails] = useState(data.plant_details)
   const [commonName, setCommonName] = useState(plantDetails.common_names)
+  let plantImage
+console.log("plant details", plant)
 
   return(
-        <Card style={styles.container}>
-            <Card.Title 
+        <Card testID='Plant-Card' accessibilityLabel='Plant Card Info' style={styles.container}>
+            <Card.Title testID="Plant-Name"
             title={commonName}
-            subtitle={plant}/>
+            subtitle={plant} />
             <Card.Content>
             <Image
-                style={styles.image}
-                source={{
-                uri: plantDetails.wiki_image.value
-                }}
+              testID="Plant-Image"
+              accessibilityLabel='Plant Image'
+              style={styles.image}
+              source={{
+              uri: plantDetails?.wiki_image?.value || "https://demofree.sirv.com/nope-not-here.jpg"
+              }}
             />
             <Paragraph
+                testID="Plant-Details"
+                accessibilityLabel="Plant Details"
                 style={styles.paragraph}>
-                {plantDetails.wiki_description.value}
+                {plantDetails?.wiki_description?.value}
             </Paragraph>
             <TouchableOpacity>
             <Button
+              testID="Plant-URL"
+              accessibilityLabel="button to more plant information"
               title="Find out more!"
-              onPress={() => Linking.openURL(plantDetails.url)}>
+              onPress={() => Linking.openURL(plantDetails?.url)}>
             </Button>
           </TouchableOpacity>
         </Card.Content>

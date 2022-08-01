@@ -20,19 +20,23 @@ export default function PickImage({handleChange}) {
         return
       }
 
-      let pickerResult = await ImagePicker.launchImageLibraryAsync()
+      let pickerResult = await ImagePicker.launchImageLibraryAsync({base64: true})
       if(pickerResult.cancelled) {
         return
       }
       setUri(pickerResult.uri)
-      handleChange(pickerResult.uri)
+      handleChange(pickerResult.base64, pickerResult.uri)
       }
   return (
       <Button
+        testID='Upload-Image'
+        accessibilityLabel='Upload Image'
         onPress={openImagePickerAsync}
-        icon="camera"
+        icon="animation-outline"
         mode="contained"
-        style={styles.button}>
+        style={styles.button}
+        contentStyle={{padding:15}}
+        >
         Upload Image
       </Button>
   )

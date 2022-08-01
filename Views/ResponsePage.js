@@ -18,8 +18,10 @@ export default function ResponsePage({ route, navigation }) {
   const { uris } = route.params;
   const [suggestions, setSuggestions] = useState(Data().suggestions)
   const [resultsCards, setResultsCards] = useState([])
+  const [errMessage, setErr] = useState(null)
   const { apiKey } = route.params;
   const handleSubmit = (uri) => {
+  
     const data = {
         api_key: apiKey,
         images: [uri[0]],
@@ -40,43 +42,66 @@ export default function ResponsePage({ route, navigation }) {
          },
          body: JSON.stringify(data),
        })
-       .then(response => response.json())
+
+       .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+          throw new Error(response.status + " " + response.statusText);
+        } else {
+          return response.json();
+        }
+      })
        .then(result => {
          setSuggestions(result.suggestions)
-         console.log('Success:', result);
        })
        .catch((error) => {
-         console.error('Error:', error);
+         setErr(`${error}`);
        });
   }
 
   const createResults = () => {
-    const resultsCardsArr = suggestions.map((suggestion) => {
-          return <Results key={suggestion.id} data={suggestion}/>
-    })
-    setResultsCards(resultsCardsArr)
+
+    if(!errMessage) {
+      const resultsCardsArr = suggestions.map((suggestion) => {
+            return <Results key={suggestion.id} data={suggestion}/>
+      })
+      setResultsCards(resultsCardsArr)
+    }
   }
 
   useEffect(() => {
-    handleSubmit(uris)
-      setTimeout(() => {
-        setSuggestions(Data2().suggestions)
-        console.log("done responsepage 66", suggestions)
-      }, 1000)
+    if(!errMessage){
+      handleSubmit(uris)
+        setTimeout(() => {
+          setSuggestions(Data2().suggestions)
+        }, 1000)
+    }
   },[])
 
   useEffect(() => {
     createResults()
-  }, [suggestions])
-
+  }, [suggestions, errMessage])
+if(errMessage) {
+  console.log("88", errMessage)
+  return(
+  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Text>{errMessage}</Text>
+    <Text>We are incredibly sorry but something went wrong.</Text>
+    <Text>Please return to the previous page and try again.</Text>
+  </View>
+  )
+}else {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <ScrollView style={styles.scrollView}>
         {resultsCards}
-        <Text>stuff</Text>
+
+
       </ScrollView>
     </View>
   )
+}
+
 }
 
 const styles = StyleSheet.create({

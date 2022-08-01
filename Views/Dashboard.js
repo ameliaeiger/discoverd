@@ -1,113 +1,107 @@
 import { StatusBar } from 'expo-status-bar'
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
+
 //Libraries
 import * as ImagePicker from 'expo-image-picker'
 import { Button } from 'react-native-paper'
 import PickImage from "../components/PickImage/PickImage"
 import TakePicture from "../components/TakePicture/TakePicture"
 import PlantImage from '../components/ImageDisplay/PlantImage'
-
+import { useFonts } from "expo-font"
 import Results from "../components/Results"
 import Data from "./data.js"
+import * as Haptics from 'expo-haptics';
 
 
-export default function Dashboard() {
-  const [imageUris, addImageUris] = useState([])
-  const [allImages, createImageComponents] = useState([])
-  const [suggestions, setSuggestions] = useState(Data().suggestions)
-  const [resultsCards, setResultsCards] = useState("")
-  const allResultsCards = makeArray(suggestions)
+export default function Dashboard({ navigation, handleChange, allImages, images, dimensions, deleteImage, apiKey }) {
+  const [hasImages, setHasImages] = useState("")
 
-  const getView = (uri) => {
-    createImageComponents([...allImages, <PlantImage uri={uri}/>])
+  useEffect(() => {
+    if (!allImages[0]){
+      setHasImages(false)
+      return
+    } else if (allImages){
+      setHasImages(true)
+      return
+    }
+  },[hasImages])
+
+  const displayText = () => {
+    return (
+      <View style={{width: dimensions.width,
+        height: 400, maxHeight: 400, backgroundColor:"white", borderTopWidth:10, borderBottomWidth:10, borderColor:"green", justifyContent:"center", alignItems:"center", color:"grey"}}>
+        <Text style={styles.displayText}>
+          Upload an image to get started
+        </Text>
+      </View>
+    )
   }
-  const handleChange = (uri) => {
-    addImageUris(imageUris => [...imageUris, uri])
-    getView(uri)
-  }
 
-
-  const handleSubmit = (uri) => {
-    const data = {
-        api_key: 'NklRmoWXEJSh0KJwF8SHOJYEwpX5FnSZyr7n5bOJ5nrwkpEHKz',
-        images: [uri[0]],
-        plant_language: 'en',
-            plant_details: ['common_names',
-                            'url',
-                            'name_authority',
-                            'wiki_description',
-                            'taxonomy',
-                            'synonyms'],
-      }
-
-      fetch('https://api.plant.id/v2/identify', {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-            "Api-Key": 'NklRmoWXEJSh0KJwF8SHOJYEwpX5FnSZyr7n5bOJ5nrwkpEHKz',
-         },
-         body: JSON.stringify(data),
-       })
-       .then(response => response.json())
-       .then(result => {
-         console.log('Success:', result);
-       })
-       .catch((error) => {
-         console.error('Error:', error);
-       });
+  const displayImages = () => {
+    return (
+      <ScrollView horizontal={true} contentContainerStyle={{justifyContent:"center", alignItems:"center"}} style={{width: dimensions.width,
+        height: 400, maxHeight:400, enum:"black", backgroundColor:"white", borderTopWidth:10, borderBottomWidth:10, borderColor:"green"}}>
+            {allImages}
+      </ScrollView>
+    )
   }
 
 
   return (
-      <View style={styles.view}>
-            <View style={styles.container}>
-
-              <ScrollView style={styles.scrollView}>
-                {allResultsCards}
-              </ScrollView>
-            <ScrollView >
-              {allImages}
-            </ScrollView>
-              <View style={styles.buttonContainer}>
-                <PickImage handleChange={handleChange}/>
-                <TakePicture handleChange={handleChange}/>
-                <Button onPress={() => handleSubmit(imageUris)} title="Submit"/>
-              </View>
-            </View>
+    <View testID='Dashboard' accessibilityLabel='Dashboard' style={{
+      width: dimensions.width,
+      maxHeight: dimensions.height,
+      }}>
+        {!hasImages ? displayText() : displayImages()}
+      <View testID='Button-Container' accessibilityLabel='Button Container' style={styles.buttonContainer}>
+        <View style={{flexDirection:"row"}}>
+          <PickImage handleChange={handleChange}/>
+          <TakePicture handleChange={handleChange}/>
+        </View>
       </View>
+      <View style={styles.buttonContainer}>
+          <Button
+            testID='Response-Button'
+            accessibilityLabel='Check Possible Plant'
+            style={styles.submitButton}
+            labelStyle={{fontSize:20, margin:0, alignItems:"center"}}
+            contentStyle={{flexDirection:"row-reverse", padding:20}}
+            title="Go to Response"
+            icon="magnify"
+            color="white"
+            onPress={() => {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+            .catch(error => {
+              return
+            })
+            navigation.navigate("responsePage", {apiKey: apiKey,
+            uris:images,
+            })
+          }}> discover
+          </Button>
+        </View>
+  </View>
   )
-}
-
-const makeArray = (array) => {
-  let emptyArray = []
-  array.forEach(suggestion => {
-    emptyArray.push(
-      <Results
-      data={suggestion}/>
-      )
-  })
-  return emptyArray
 }
 
 const styles = StyleSheet.create({
   scrollView: {
-    maxHeight: 500,
+    transform: [{scaleX: -1}],
   },
-  container: {
-    flexDirection: "column",
-    backgroundColor: '#A7D9A3',
-    justifyContent: 'center',
-    alignItems: "center",
+  submitButton: {
+    elevation: 20,
+    borderRadius: 5,
+    margin: 5,
+    backgroundColor:"green",
+    justifyContent:"center",
   },
   buttonContainer: {
-    flexDirection: "row",
-    marginBottom: 5,
-  },
-  button: {
-    color: "#fff",
-    backgroundColor: "#2EC17E",
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    height: "20%",
+  },
+  displayText: {
+    fontFamily: "Poppins"
   }
 })
