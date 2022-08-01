@@ -14,7 +14,7 @@ import Data from "./data.js"
 import * as Haptics from 'expo-haptics';
 
 
-export default function Dashboard({ navigation, handleChange, allImages, images, dimensions, apiKey }) {
+export default function Dashboard({ navigation, handleChange, allImages, images, dimensions, deleteImage, apiKey }) {
   const [hasImages, setHasImages] = useState("")
 
   useEffect(() => {
@@ -23,7 +23,6 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
       return
     } else if (allImages){
       setHasImages(true)
-      console.log(hasImages)
       return
     }
   },[hasImages])
@@ -50,7 +49,6 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
 
 
   return (
-
     <View testID='Dashboard' accessibilityLabel='Dashboard' style={{
       width: dimensions.width,
       maxHeight: dimensions.height,
@@ -64,14 +62,15 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
       </View>
       <View style={styles.buttonContainer}>
           <Button
-          testID='Response-Button'
-          accessibilityLabel='Check Possible Plant'
-          style={styles.submitButton}
-          title="Go to Response"
-          // type="contain"
-          icon="alarm-light-outline"
-          color="white"
-          onPress={() => {
+            testID='Response-Button'
+            accessibilityLabel='Check Possible Plant'
+            style={styles.submitButton}
+            labelStyle={{fontSize:20, margin:0, alignItems:"center"}}
+            contentStyle={{flexDirection:"row-reverse", padding:20}}
+            title="Go to Response"
+            icon="magnify"
+            color="white"
+            onPress={() => {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
             .catch(error => {
               return
@@ -79,7 +78,7 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
             navigation.navigate("responsePage", {apiKey: apiKey,
             uris:images,
             })
-          }}> Discover!
+          }}> discover
           </Button>
         </View>
   </View>
@@ -91,14 +90,11 @@ const styles = StyleSheet.create({
     transform: [{scaleX: -1}],
   },
   submitButton: {
-    elevation: 5,
-    fontSize: 40,
-    height: 150,
-    width: 250,
+    elevation: 20,
     borderRadius: 5,
     margin: 5,
     backgroundColor:"green",
-    justifyContent: "center",
+    justifyContent:"center",
   },
   buttonContainer: {
     flexDirection: "column",

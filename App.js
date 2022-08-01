@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, View, Text, ScrollView, Image, Dimensions } from 'react-native';
 import { Button } from "react-native-paper"
 import Dashboard from "./Views/Dashboard";
@@ -24,12 +24,27 @@ export default function App() {
   const windowDimensions = Dimensions. get('window')
   const Stack = createNativeStackNavigator();
 
-  const getView = (uri) => {
-    createImageComponents([...allImages, <PlantImage key={uri} uri={uri}/>])
-  }
   const handleChange = (stringInfo, uri) => {
     addImageUris(imageUris => [...imageUris, stringInfo])
     getView(uri)
+  }
+
+  // NEW
+  const deleteImage = (uri) => {
+  
+
+  }
+
+  useEffect(() => {
+    console.log("change triggered", allImages.length)
+
+  },[allImages])
+
+  // END NEW
+
+
+  const getView = (uri) => {
+    createImageComponents([...allImages, <PlantImage key={uri} uri={uri} deleteImage={deleteImage}/>])
   }
 
   function WelcomeScreen({ navigation }) {

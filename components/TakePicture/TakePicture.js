@@ -31,7 +31,9 @@ export default function TakePicture({handleChange}) {
         onPress={openCameraAsync}
         icon="camera"
         mode="contained"
-        style={styles.button}>
+        style={styles.button}
+        contentStyle={{padding:15}}
+      >
         Take a Picture
       </Button>
   )
