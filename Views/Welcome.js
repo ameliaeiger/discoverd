@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
 
+  const [key, setKey] = useState('')
   const [loaded] = useFonts({
       Poppins: require('../assets/poppinsLight.ttf'),
     })
@@ -16,8 +17,7 @@ export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
       return <Text>loading</Text>
     }
 
-    const [key, setKey] = useState('')
-  
+
   return (
     <KeyboardAvoidingView behavior="height" style={{flex:1}}>
       <View testID='Welcome-Page' accessibilityLabel='Welcome Page' style={{
