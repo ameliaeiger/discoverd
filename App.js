@@ -95,8 +95,8 @@ export default function App() {
             }
           }}
           component={WelcomeScreen} />
-        <Stack.Screen name="home" component={HomeScreen} />
-        <Stack.Screen name="responsePage" component={ResponsePage} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Results" component={ResponsePage} />
       </Stack.Navigator>
     </NavigationContainer>
   )
