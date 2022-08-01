@@ -16,59 +16,59 @@ export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
     }
   return (
     <KeyboardAvoidingView behavior="height" style={{flex:1}}>
-    <View testID='Welcome-Page' accessibilityLabel='Welcome Page' style={{
-      flex:1,
-      backgroundColor: 'white',
-      justifyContent: 'center',
-      height: dimensions.height,
-      width: dimensions.width,
-    }}>
-      <View style={styles.welcomeText}>
-        <Text testID='Greeting' accessibilityLabel='Welcome with leaf' style={styles.headerText}>
-            Welcome! 🌿
-        </Text>
-        <Text testID='Greeting-Info' accessibilityLabel='Info about app' style={styles.text}>
-          discoverd is a tool to help you identify the plant life around you.
-        </Text>
-      </View>
-      <View>
-        <View style={{width:dimensions.width, margin:5}}>
-          <TextInput
-            label="* Required"
-            placeholder="Please input API key from Plant.ID"
-            value={apiKey}
-            onChangeText= {apiKey => setApiKey(apiKey)}
-            style={{fontSize: 15, width:dimensions.width*.98}}
-            underlineColor="gray"
-            activeUnderlineColor="green"
-          />
+      <View testID='Welcome-Page' accessibilityLabel='Welcome Page' style={{
+        flex:1,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        height: dimensions.height,
+        width: dimensions.width,
+      }}>
+        <View style={styles.welcomeText}>
+          <Text testID='Greeting' accessibilityLabel='Welcome with leaf' style={styles.headerText}>
+              Welcome! 🌿
+          </Text>
+          <Text testID='Greeting-Info' accessibilityLabel='Info about app' style={styles.text}>
+            discoverd is a tool to help you identify the plant life around you.
+          </Text>
         </View>
-      </View>
-      <View style={{width: dimensions.width, alignItems:"center", marginTop:"4%"}}>
-        <Button
-            testID='Nav-Button-Dashboard'
-            accessibilityLabel='Button To Dashboard'
-            style={styles.button}
-            mode="contained"
-            color="green"
-            onPress={() => {
-              Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
-              .catch(error => {
-                return
-              })
-              if(!apiKey || apiKey.length < 50){
-                Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
+        <View>
+          <View style={{width:dimensions.width, margin:5}}>
+            <TextInput
+              label="* Required"
+              placeholder="Please input API key from Plant.ID"
+              value={apiKey}
+              onChangeText= {apiKey => setApiKey(apiKey)}
+              style={{fontSize: 15, width:dimensions.width*.98}}
+              underlineColor="gray"
+              activeUnderlineColor="green"
+            />
+          </View>
+        </View>
+        <View style={{width: dimensions.width, alignItems:"center", marginTop:"4%"}}>
+          <Button
+              testID='Nav-Button-Dashboard'
+              accessibilityLabel='Button To Dashboard'
+              style={styles.button}
+              mode="contained"
+              color="green"
+              onPress={() => {
+                Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
                 .catch(error => {
                   return
                 })
-              return alert("Please fill out all required fields")
-              }
-              navigation.navigate("home")
-            }}
-          >Get started!
-        </Button>
+                // if(!apiKey || apiKey.length < 50){
+                  // Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
+                  // .catch(error => {
+                  //   return
+                  // })
+                // return alert("Please fill out all required fields")
+                // }
+                navigation.navigate("home")
+              }}
+            >Get started!
+          </Button>
+        </View>
       </View>
-    </View>
     </KeyboardAvoidingView>
   )
 }

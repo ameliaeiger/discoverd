@@ -32,9 +32,11 @@ export default function PickImage({handleChange}) {
         testID='Upload-Image'
         accessibilityLabel='Upload Image'
         onPress={openImagePickerAsync}
-        icon="camera"
+        icon="animation-outline"
         mode="contained"
-        style={styles.button}>
+        style={styles.button}
+        contentStyle={{padding:15}}
+        >
         Upload Image
       </Button>
   )

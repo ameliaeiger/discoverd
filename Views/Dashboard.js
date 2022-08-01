@@ -67,9 +67,9 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
             accessibilityLabel='Check Possible Plant'
             style={styles.submitButton}
             labelStyle={{fontSize:20, margin:0, alignItems:"center"}}
-            contentStyle={{justifyContent:"center", padding:20}}
+            contentStyle={{flexDirection:"row-reverse", padding:20}}
             title="Go to Response"
-            icon="alarm-light-outline"
+            icon="magnify"
             color="white"
             onPress={() => {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
@@ -79,7 +79,7 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
             navigation.navigate("responsePage", {apiKey: apiKey,
             uris:images,
             })
-          }}> Discover!
+          }}> discover
           </Button>
         </View>
   </View>
