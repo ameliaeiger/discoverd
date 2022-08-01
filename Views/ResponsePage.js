@@ -22,7 +22,6 @@ export default function ResponsePage({ route, navigation }) {
   const { apiKey } = route.params;
   
   const handleSubmit = (uri) => {
-    console.log(apiKey)
     const data = {
         api_key: apiKey,
         images: [uri[0]],
