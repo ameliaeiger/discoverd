@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, View, Text, ScrollView, Image, Dimensions } from 'react-native';
 import { Button } from "react-native-paper"
 import Dashboard from "./Views/Dashboard";
@@ -7,18 +7,12 @@ import Welcome from './Views/Welcome';
 import Results from './components/Results';
 import {NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {API_KEY} from "./API_KEY.js"
 import ResponsePage from './Views/ResponsePage'
 import PickImage from "./components/PickImage/PickImage"
 import TakePicture from "./components/TakePicture/TakePicture"
 import PlantImage from './components/ImageDisplay/PlantImage'
 import HeaderLogo from './components/Header'
 import { useFonts } from "expo-font"
-// ---------------- libraries ---------------- //
-// import PickImage from "../components/PickImage/PickImage"
-// import TakePicture from "../components/TakePicture/TakePicture"
-// import Data from "./Views/data.js"
-// import Logo from "./assets/Logo.png"
 
 
 
@@ -30,12 +24,27 @@ export default function App() {
   const windowDimensions = Dimensions. get('window')
   const Stack = createNativeStackNavigator();
 
-  const getView = (uri) => {
-    createImageComponents([...allImages, <PlantImage key={uri} uri={uri}/>])
-  }
   const handleChange = (stringInfo, uri) => {
     addImageUris(imageUris => [...imageUris, stringInfo])
     getView(uri)
+  }
+
+  // NEW
+  const deleteImage = (uri) => {
+  
+
+  }
+
+  useEffect(() => {
+    console.log("change triggered", allImages.length)
+
+  },[allImages])
+
+  // END NEW
+
+
+  const getView = (uri) => {
+    createImageComponents([...allImages, <PlantImage key={uri} uri={uri} deleteImage={deleteImage}/>])
   }
 
   function WelcomeScreen({ navigation }) {
