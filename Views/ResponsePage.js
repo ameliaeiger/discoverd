@@ -37,7 +37,7 @@ export default function ResponsePage({ route, navigation, apiKey }) {
          method: 'POST',
          headers: {
            'Content-Type': 'application/json',
-            "Api-Key": API_KEY,
+            "Api-Key": apiKey,
          },
          body: JSON.stringify(data),
        })
