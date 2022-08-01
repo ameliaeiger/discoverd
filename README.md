@@ -30,23 +30,18 @@
 1. Clone this [repository](https://github.com/ameliaeiger/discoverd).
 2. `cd` into the directory.
 3. Run `npm i install`.
-4. Run `npm install react-native-paper`.
-5. Run `npm install react-router-native`
-6. Run `npm install -g expo-cli`
-7. Run `expo install expo-image-picker`
-8. Run `expo install expo-haptics`
-9. Run npm start to show in web browser
+4. Run npm start to show in web browser
 
 #### To Run On Your Phone
 
 ### Features
+#### Illustrations
+![App-Use](Discoverd-Use.gif)
+![Click-To-Wiki](Click-to-wiki.gif)
+
 - User can upload image from camera-roll to app
 - User can take a picture and upload to app
 - User can upload several images to send to API for identification
-
-
-### Reflections
-
 
 ### Future Features
 - Daily Plant user can read about
