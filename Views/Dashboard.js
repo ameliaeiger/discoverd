@@ -15,17 +15,15 @@ import Data from "./data.js"
 import * as Haptics from 'expo-haptics';
 
 
-export default function Dashboard({ navigation, handleChange, allImages, images, dimensions }) {
+export default function Dashboard({ navigation, handleChange, allImages, images, dimensions, deleteImage }) {
   const [hasImages, setHasImages] = useState("")
 
   useEffect(() => {
     if (!allImages[0]){
       setHasImages(false)
-      console.log(hasImages)
       return
     } else if (allImages){
       setHasImages(true)
-      console.log(hasImages)
       return
     }
   },[hasImages])
@@ -52,7 +50,6 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
 
 
   return (
-
     <View testID='Dashboard' accessibilityLabel='Dashboard' style={{
       width: dimensions.width,
       maxHeight: dimensions.height,
