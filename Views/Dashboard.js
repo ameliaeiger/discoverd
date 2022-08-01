@@ -15,7 +15,7 @@ import Data from "./data.js"
 import * as Haptics from 'expo-haptics';
 
 
-export default function Dashboard({ navigation, handleChange, allImages, images, dimensions }) {
+export default function Dashboard({ navigation, handleChange, allImages, images, dimensions, apiKey }) {
   const [hasImages, setHasImages] = useState("")
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
         </View>
       </View>
       <View style={styles.buttonContainer}>
-          <Button 
+          <Button
           testID='Response-Button'
           accessibilityLabel='Check Possible Plant'
           style={styles.submitButton}
@@ -78,7 +78,7 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
             .catch(error => {
               return
             })
-            navigation.navigate("responsePage", {
+            navigation.navigate("responsePage", {apiKey: apiKey,
             uris:images,
             })
           }}> Discover!
@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
   submitButton: {
     elevation: 5,
     fontSize: 40,
-    height: 150, 
-    width: 250, 
+    height: 150,
+    width: 250,
     borderRadius: 5,
     margin: 5,
     backgroundColor:"green",
