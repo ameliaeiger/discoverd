@@ -8,7 +8,7 @@ import TakePicture from "../components/TakePicture/TakePicture"
 import * as Haptics from 'expo-haptics';
 
 export default function Dashboard({ navigation, handleChange, allImages, images, dimensions, deleteImage, apiKey }) {
-  
+
   const [hasImages, setHasImages] = useState("")
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
       setHasImages(true)
       return
     }
-  },[])
+  },[allImages])
 
   const displayText = () => {
     return (
@@ -46,7 +46,7 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
       width: dimensions.width,
       maxHeight: dimensions.height,
       }}>
-        {!hasImages ? displayText() : displayImages()}
+        {hasImages===false ? displayText() : displayImages()}
       <View testID='Button-Container' accessibilityLabel='Button Container' style={styles.buttonContainer}>
         <View style={{flexDirection:"row"}}>
           <PickImage handleChange={handleChange}/>

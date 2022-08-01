@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   },
   thumbnail: {
     height: 300,
-    width: 150,
+    width: 250,
     padding: 0,
     margin: 5,
     borderRadius: 10,

@@ -63,14 +63,14 @@ export default function ResponsePage({ route, navigation }) {
     }
   }
 
-  useEffect(() => {
-    if(!errMessage){
-      handleSubmit(uris)
-        setTimeout(() => {
-          setSuggestions(Data2().suggestions)
-        }, 1000)
-    }
-  },[])
+  // useEffect(() => {
+  //   if(!errMessage){
+  //     handleSubmit(uris)
+  //       setTimeout(() => {
+  //         setSuggestions(Data2().suggestions)
+  //       }, 1000)
+  //   }
+  // },[])
 
   useEffect(() => {
     createResults()
