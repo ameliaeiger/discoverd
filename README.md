@@ -30,11 +30,19 @@
 1. Clone this [repository](https://github.com/ameliaeiger/discoverd).
 2. `cd` into the directory.
 3. Run `npm i install`.
-4. Run npm start to show in web browser
+4. Run npm start, then 'w' to show in web browser
 
 #### To Run On Your Phone
+1. Install Expo Go from the app store
+2. Run 'expo start' in your terminal
+3. Scan the QR code with your device
+
+### Deployment Link
+Checkout [discoverd](https://expo.dev/@discoverd/discoverd) !
+- Scan the QR code from your device (Must have expo go installed)
 
 ### Features
+
 #### Illustrations
 ![App-Use](Discoverd-Use.gif)
 ![Click-To-Wiki](Click-to-wiki.gif)
