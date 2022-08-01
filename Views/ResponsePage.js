@@ -20,8 +20,9 @@ export default function ResponsePage({ route, navigation }) {
   const [resultsCards, setResultsCards] = useState([])
   const [errMessage, setErr] = useState(null)
   const { apiKey } = route.params;
-  const handleSubmit = (uri) => {
   
+  const handleSubmit = (uri) => {
+    console.log(apiKey)
     const data = {
         api_key: apiKey,
         images: [uri[0]],
