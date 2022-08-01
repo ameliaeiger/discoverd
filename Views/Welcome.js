@@ -8,12 +8,16 @@ import { NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
+
   const [loaded] = useFonts({
       Poppins: require('../assets/poppinsLight.ttf'),
     })
     if (!loaded) {
       return <Text>loading</Text>
     }
+
+    const [key, setKey] = useState('')
+  
   return (
     <KeyboardAvoidingView behavior="height" style={{flex:1}}>
       <View testID='Welcome-Page' accessibilityLabel='Welcome Page' style={{
@@ -36,8 +40,8 @@ export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
             <TextInput
               label="* Required"
               placeholder="Please input API key from Plant.ID"
-              value={apiKey}
-              onChangeText= {apiKey => setApiKey(apiKey)}
+              value={key}
+              onChangeText= {setKey}
               style={{fontSize: 15, width:dimensions.width*.98}}
               underlineColor="gray"
               activeUnderlineColor="green"
@@ -56,13 +60,14 @@ export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
                 .catch(error => {
                   return
                 })
-                // if(!apiKey || apiKey.length < 50){
-                  // Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
-                  // .catch(error => {
-                  //   return
-                  // })
-                // return alert("Please fill out all required fields")
-                // }
+                if(!key || key.length < 50){
+                  setApiKey(key)
+                  Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
+                    .catch(error => {
+                       return
+                     })
+                   return alert("Please fill out all required fields")
+                  }
                 navigation.navigate("home")
               }}
             >Get started!
