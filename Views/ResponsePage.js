@@ -15,14 +15,14 @@ import Data from "./data.js"
 import Data2 from './data2.js';
 
 
-export default function ResponsePage({ route, navigation }) {
+export default function ResponsePage({ route, navigation, apiKey }) {
   const { uris } = route.params;
   const [suggestions, setSuggestions] = useState(Data().suggestions)
   const [resultsCards, setResultsCards] = useState([])
 
   const handleSubmit = (uri) => {
     const data = {
-        api_key: API_KEY,
+        api_key: apiKey,
         images: [uri[0]],
         plant_language: 'en',
             plant_details: ['common_names',
