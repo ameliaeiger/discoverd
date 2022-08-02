@@ -1,24 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useEffect, useState} from 'react';
-import { StyleSheet, View, Text, ScrollView, Image, Dimensions } from 'react-native';
-import { Button } from "react-native-paper"
+import React, {useState} from 'react';
+import { StyleSheet, View, Text, ScrollView, Dimensions } from 'react-native';
 import Dashboard from "./Views/Dashboard";
 import Welcome from './Views/Welcome';
-import Results from './components/Results';
 import {NavigationContainer} from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ResponsePage from './Views/ResponsePage'
-import PickImage from "./components/PickImage/PickImage"
-import TakePicture from "./components/TakePicture/TakePicture"
 import PlantImage from './components/ImageDisplay/PlantImage'
 import HeaderLogo from './components/Header'
-import { useFonts } from "expo-font"
-
-
 
 export default function App() {
   const [imageUris, addImageUris] = useState([])
-  const [allImages, createImageComponents] = useState([])
+  const [allImages, setAllImages] = useState([])
   const [apiKey, setApiKey] = useState('')
 
   const windowDimensions = Dimensions. get('window')
@@ -29,22 +22,8 @@ export default function App() {
     getView(uri)
   }
 
-  // NEW
-  const deleteImage = (uri) => {
-  
-
-  }
-
-  useEffect(() => {
-    console.log("change triggered", allImages.length)
-
-  },[allImages])
-
-  // END NEW
-
-
   const getView = (uri) => {
-    createImageComponents([...allImages, <PlantImage key={uri} uri={uri} deleteImage={deleteImage}/>])
+    setAllImages([...allImages, <PlantImage key={Date.now()} uri={uri}/>])
   }
 
   function WelcomeScreen({ navigation }) {
@@ -59,7 +38,7 @@ export default function App() {
   function HomeScreen({ navigation }) {
     return(
         <View style={{
-          backgroundColor: '#A7D9A3',
+          backgroundColor:'#D6E6D6',
           height: windowDimensions.height,
           alignContent: "stretch",
         }}>
@@ -83,11 +62,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="welcome"
+          name="Welcome"
           options={{
             headerTitle:() => <HeaderLogo />,
             headerStyle: {
-              backgroundColor: "#82E0AA",
+              backgroundColor: "#D6E6D6",
             },
             headerTintColor: "white",
             headerTitleStye: {
@@ -95,8 +74,15 @@ export default function App() {
             }
           }}
           component={WelcomeScreen} />
-        <Stack.Screen name="home" component={HomeScreen} />
-        <Stack.Screen name="responsePage" component={ResponsePage} />
+        <Stack.Screen 
+        name="Home"
+        options={{
+          headerStyle: {
+            backgroundColor:"#D6E6D6"
+          }
+        }}
+        component={HomeScreen} />
+        <Stack.Screen name="Results" component={ResponsePage} />
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -113,7 +99,7 @@ const styles = StyleSheet.create({
     maxHeight: 500,
   },
   button: {
-    backgroundColor: "#82E0AA",
+    backgroundColor: "#147d00",
     justifyContent: "center",
     height: 40,
     width: 200,

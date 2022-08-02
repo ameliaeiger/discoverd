@@ -1,15 +1,13 @@
-import React, {useState, useEffect} from 'react'
-import { Text, View, Image, Button, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { Image, TouchableOpacity } from 'react-native'
 import {styles} from '../PickImage/PickImageStyles'
 
-const ImageDisplay = ({uri, deleteImage}) => {
-
-
+const PlantImage = ({key, uri}) => {
   return(
     <TouchableOpacity 
-        onPress={() => deleteImage(uri)}>
+        id={key}>
           <Image
-            key={uri}
+            key={key}
             style={styles.thumbnail}
             source={{uri:uri}}
         />
@@ -17,4 +15,4 @@ const ImageDisplay = ({uri, deleteImage}) => {
   )
 }
 
-export default ImageDisplay
+export default PlantImage

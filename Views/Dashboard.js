@@ -1,36 +1,32 @@
-import { StatusBar } from 'expo-status-bar'
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, ScrollView } from 'react-native'
 
 //Libraries
-import * as ImagePicker from 'expo-image-picker'
 import { Button } from 'react-native-paper'
 import PickImage from "../components/PickImage/PickImage"
 import TakePicture from "../components/TakePicture/TakePicture"
-import PlantImage from '../components/ImageDisplay/PlantImage'
-import { useFonts } from "expo-font"
-import Results from "../components/Results"
-import Data from "./data.js"
 import * as Haptics from 'expo-haptics';
 
+export default function Dashboard({ navigation, handleChange, allImages, images, dimensions, apiKey }) {
 
-export default function Dashboard({ navigation, handleChange, allImages, images, dimensions, deleteImage, apiKey }) {
   const [hasImages, setHasImages] = useState("")
 
   useEffect(() => {
+    console.log(allImages)
     if (!allImages[0]){
       setHasImages(false)
       return
     } else if (allImages){
+      console.log(allImages)
       setHasImages(true)
       return
     }
-  },[hasImages])
+  },[allImages])
 
   const displayText = () => {
     return (
       <View style={{width: dimensions.width,
-        height: 400, maxHeight: 400, backgroundColor:"white", borderTopWidth:10, borderBottomWidth:10, borderColor:"green", justifyContent:"center", alignItems:"center", color:"grey"}}>
+        height: 400, maxHeight: 400, backgroundColor:"white", borderTopWidth:10, borderBottomWidth:10, borderColor:"gray", justifyContent:"center", alignItems:"center", color:"grey"}}>
         <Text style={styles.displayText}>
           Upload an image to get started
         </Text>
@@ -41,26 +37,24 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
   const displayImages = () => {
     return (
       <ScrollView horizontal={true} contentContainerStyle={{justifyContent:"center", alignItems:"center"}} style={{width: dimensions.width,
-        height: 400, maxHeight:400, enum:"black", backgroundColor:"white", borderTopWidth:10, borderBottomWidth:10, borderColor:"green"}}>
+        height: 400, maxHeight:400, enum:"black", backgroundColor:"#FCFFF8", borderTopWidth:10, borderBottomWidth:10, borderColor:"#147d00"}}>
             {allImages}
       </ScrollView>
     )
   }
-
 
   return (
     <View testID='Dashboard' accessibilityLabel='Dashboard' style={{
       width: dimensions.width,
       maxHeight: dimensions.height,
       }}>
-        {!hasImages ? displayText() : displayImages()}
+        {hasImages===false ? displayText() : displayImages()}
       <View testID='Button-Container' accessibilityLabel='Button Container' style={styles.buttonContainer}>
         <View style={{flexDirection:"row"}}>
           <PickImage handleChange={handleChange}/>
           <TakePicture handleChange={handleChange}/>
         </View>
-      </View>
-      <View style={styles.buttonContainer}>
+      <View>
           <Button
             testID='Response-Button'
             accessibilityLabel='Check Possible Plant'
@@ -75,12 +69,13 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
             .catch(error => {
               return
             })
-            navigation.navigate("responsePage", {apiKey: apiKey,
+            navigation.navigate("Results", {apiKey: apiKey,
             uris:images,
             })
           }}> discover
           </Button>
         </View>
+      </View>
   </View>
   )
 }
@@ -90,16 +85,17 @@ const styles = StyleSheet.create({
     transform: [{scaleX: -1}],
   },
   submitButton: {
-    elevation: 20,
-    borderRadius: 5,
-    margin: 5,
-    backgroundColor:"green",
+    elevation: 5,
+    borderRadius: 50,
+    marginTop: 50,
+    backgroundColor:"#147d00",
     justifyContent:"center",
   },
   buttonContainer: {
     flexDirection: "column",
     alignItems: "center",
-    height: "20%",
+    height: "40%",
+    padding:5,
   },
   displayText: {
     fontFamily: "Poppins"

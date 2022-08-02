@@ -1,20 +1,12 @@
-import { StatusBar } from 'expo-status-bar'
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native'
 
 //Libraries
-import * as ImagePicker from 'expo-image-picker'
-import { Button } from 'react-native-paper'
-import PickImage from "../components/PickImage/PickImage"
-import TakePicture from "../components/TakePicture/TakePicture"
-import PlantImage from '../components/ImageDisplay/PlantImage'
-
 import Results from "../components/Results"
 import Data from "./data.js"
 import Data2 from './data2.js';
 
-
-export default function ResponsePage({ route, navigation }) {
+export default function ResponsePage({ route }) {
   const { uris } = route.params;
   const [suggestions, setSuggestions] = useState(Data().suggestions)
   const [resultsCards, setResultsCards] = useState([])
@@ -22,7 +14,6 @@ export default function ResponsePage({ route, navigation }) {
   const { apiKey } = route.params;
   
   const handleSubmit = (uri) => {
-    console.log(apiKey)
     const data = {
         api_key: apiKey,
         images: [uri[0]],
@@ -46,7 +37,6 @@ export default function ResponsePage({ route, navigation }) {
 
        .then((response) => {
         if (!response.ok) {
-          console.log(response);
           throw new Error(response.status + " " + response.statusText);
         } else {
           return response.json();
@@ -82,27 +72,21 @@ export default function ResponsePage({ route, navigation }) {
   useEffect(() => {
     createResults()
   }, [suggestions, errMessage])
-if(errMessage) {
-  console.log("88", errMessage)
-  return(
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>{errMessage}</Text>
-    <Text>We are incredibly sorry but something went wrong.</Text>
-    <Text>Please return to the previous page and try again.</Text>
-  </View>
-  )
-}else {
-  return (
+  if(errMessage) {
+    return(
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <ScrollView style={styles.scrollView}>
-        {resultsCards}
-
-
-      </ScrollView>
+      <Text>{errMessage}</Text>
+      <Text>We are incredibly sorry but something went wrong.</Text>
+      <Text>Please return to the previous page and try again.</Text>
     </View>
-  )
-}
-
+    )
+  }else {
+    return (
+        <ScrollView style={styles.scroll}>
+          {resultsCards}
+        </ScrollView>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -111,6 +95,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    border: "2px solid red",
+  },
+  scroll: {
+
   },
 })

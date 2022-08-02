@@ -4,8 +4,6 @@ import { Text, Button, TextInput } from "react-native-paper"
 import { useFonts } from "expo-font"
 import * as Haptics from 'expo-haptics';
 import { useState, useEffect } from "react"
-import { NavigationContainer} from "@react-navigation/native"
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
 
@@ -53,22 +51,22 @@ export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
               testID='Nav-Button-Dashboard'
               accessibilityLabel='Button To Dashboard'
               style={styles.button}
+              contentStyle={{padding:10}}
               mode="contained"
-              color="green"
               onPress={() => {
-                Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
-                .catch(error => {
-                  return
-                })
-                setApiKey(key)
                 if(!key || key.length < 50){
                   Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
                     .catch(error => {
                        return
                      })
-                   return alert("Please fill out all required fields")
+                   return alert("Please fill out all required fields.")
                   }
-                navigation.navigate("home")
+                Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+                .catch(error => {
+                  return
+                })
+                setApiKey(key)
+                navigation.navigate("Home")
               }}
             >Get started!
           </Button>
@@ -98,7 +96,8 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "50%",
-    justifyContent:"center"
+    justifyContent:"center",
+    backgroundColor:"#147d00",
   },
   // buttonContainer: {
   //   width: dimensions.width,

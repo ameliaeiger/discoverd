@@ -34,7 +34,7 @@ export default function TakePicture({handleChange}) {
         style={styles.button}
         contentStyle={{padding:15}}
       >
-        Take a Picture
+        Open Camera
       </Button>
   )
 }
