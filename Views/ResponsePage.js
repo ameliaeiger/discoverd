@@ -14,7 +14,6 @@ export default function ResponsePage({ route }) {
   const { apiKey } = route.params;
   
   const handleSubmit = (uri) => {
-    console.log(apiKey)
     const data = {
         api_key: apiKey,
         images: [uri[0]],
@@ -38,7 +37,6 @@ export default function ResponsePage({ route }) {
 
        .then((response) => {
         if (!response.ok) {
-          console.log(response);
           throw new Error(response.status + " " + response.statusText);
         } else {
           return response.json();
@@ -75,7 +73,6 @@ export default function ResponsePage({ route }) {
     createResults()
   }, [suggestions, errMessage])
   if(errMessage) {
-    console.log("88", errMessage)
     return(
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>{errMessage}</Text>
