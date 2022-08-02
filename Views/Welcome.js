@@ -54,7 +54,7 @@ export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
               contentStyle={{padding:10}}
               mode="contained"
               onPress={() => {
-                if(!key || key.length < 50){
+                if(!key){
                   Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
                     .catch(error => {
                        return
