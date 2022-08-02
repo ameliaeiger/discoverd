@@ -51,16 +51,16 @@ export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
               testID='Nav-Button-Dashboard'
               accessibilityLabel='Button To Dashboard'
               style={styles.button}
+              contentStyle={{padding:10}}
               mode="contained"
-              color="green"
               onPress={() => {
-                // if(!key || key.length < 50){
-                //   Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
-                //     .catch(error => {
-                //        return
-                //      })
-                //    return alert("Please fill out all required fields.")
-                //   }
+                if(!key || key.length < 50){
+                  Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
+                    .catch(error => {
+                       return
+                     })
+                   return alert("Please fill out all required fields.")
+                  }
                 Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
                 .catch(error => {
                   return
@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "50%",
-    justifyContent:"center"
+    justifyContent:"center",
+    backgroundColor:"#147d00",
   },
   // buttonContainer: {
   //   width: dimensions.width,

@@ -7,15 +7,17 @@ import PickImage from "../components/PickImage/PickImage"
 import TakePicture from "../components/TakePicture/TakePicture"
 import * as Haptics from 'expo-haptics';
 
-export default function Dashboard({ navigation, handleChange, allImages, images, dimensions, deleteImage, apiKey }) {
+export default function Dashboard({ navigation, handleChange, allImages, images, dimensions, apiKey }) {
 
   const [hasImages, setHasImages] = useState("")
 
   useEffect(() => {
+    console.log(allImages)
     if (!allImages[0]){
       setHasImages(false)
       return
     } else if (allImages){
+      console.log(allImages)
       setHasImages(true)
       return
     }
@@ -24,7 +26,7 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
   const displayText = () => {
     return (
       <View style={{width: dimensions.width,
-        height: 400, maxHeight: 400, backgroundColor:"white", borderTopWidth:10, borderBottomWidth:10, borderColor:"green", justifyContent:"center", alignItems:"center", color:"grey"}}>
+        height: 400, maxHeight: 400, backgroundColor:"white", borderTopWidth:10, borderBottomWidth:10, borderColor:"gray", justifyContent:"center", alignItems:"center", color:"grey"}}>
         <Text style={styles.displayText}>
           Upload an image to get started
         </Text>
@@ -35,7 +37,7 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
   const displayImages = () => {
     return (
       <ScrollView horizontal={true} contentContainerStyle={{justifyContent:"center", alignItems:"center"}} style={{width: dimensions.width,
-        height: 400, maxHeight:400, enum:"black", backgroundColor:"white", borderTopWidth:10, borderBottomWidth:10, borderColor:"green"}}>
+        height: 400, maxHeight:400, enum:"black", backgroundColor:"#FCFFF8", borderTopWidth:10, borderBottomWidth:10, borderColor:"#147d00"}}>
             {allImages}
       </ScrollView>
     )
@@ -84,9 +86,9 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     elevation: 5,
-    borderRadius: 5,
+    borderRadius: 50,
     marginTop: 50,
-    backgroundColor:"green",
+    backgroundColor:"#147d00",
     justifyContent:"center",
   },
   buttonContainer: {
