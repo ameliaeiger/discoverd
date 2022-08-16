@@ -18,13 +18,15 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   const handleChange = (baseString, uri) => {
-    addImageUris(imageUris => [...imageUris, baseString])
-    console.log("IMAGE URIS (App.js 22)", imageUris)
+    console.log("APP 21 BASE STRING", baseString)
+    console.log("APP 22 URI", uri)
+    addImageUris([...imageUris, baseString])
+    // console.log("IMAGE URIS (App.js 22)", imageUris)
     getView(uri)
   }
 
   const getView = (uri) => {
-    console.log("ALL IMAGES (App.js 27)", allImages)
+    // console.log("ALL IMAGES (App.js 27)", allImages)
     setAllImages([...allImages, <PlantImage key={Date.now()} uri={uri}/>])
   }
 
