@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ResponsePage from './Views/ResponsePage'
 import PlantImage from './components/ImageDisplay/PlantImage'
 import HeaderLogo from './components/Header'
+console.log(process.env.REACT_APP_API_KEY)
 
 export default function App() {
   const [imageUris, addImageUris] = useState([])
@@ -27,6 +28,7 @@ export default function App() {
   }
 
   function WelcomeScreen({ navigation }) {
+
     return (
         <Welcome
           apiKey = {apiKey}
@@ -74,7 +76,7 @@ export default function App() {
             }
           }}
           component={WelcomeScreen} />
-        <Stack.Screen 
+        <Stack.Screen
         name="Home"
         options={{
           headerStyle: {
