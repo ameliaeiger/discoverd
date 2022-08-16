@@ -7,8 +7,6 @@ import { Button } from "react-native-paper"
 
 export default function PickImage({handleChange}) {
 
-  const [localUri, setUri] = useState("")
-
     let openImagePickerAsync = async () => {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
         .catch(error => {
@@ -24,7 +22,6 @@ export default function PickImage({handleChange}) {
       if(pickerResult.cancelled) {
         return
       }
-      setUri(pickerResult.uri)
       handleChange(pickerResult.base64, pickerResult.uri)
       }
   return (
