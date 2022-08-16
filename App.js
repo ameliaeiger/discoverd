@@ -17,12 +17,14 @@ export default function App() {
   const windowDimensions = Dimensions. get('window')
   const Stack = createNativeStackNavigator();
 
-  const handleChange = (stringInfo, uri) => {
-    addImageUris(imageUris => [...imageUris, stringInfo])
+  const handleChange = (baseString, uri) => {
+    addImageUris(imageUris => [...imageUris, baseString])
+    console.log("IMAGE URIS (App.js 22)", imageUris)
     getView(uri)
   }
 
   const getView = (uri) => {
+    console.log("ALL IMAGES (App.js 27)", allImages)
     setAllImages([...allImages, <PlantImage key={Date.now()} uri={uri}/>])
   }
 
