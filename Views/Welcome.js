@@ -1,11 +1,12 @@
-import * as React from "react"
-import { StyleSheet, View, Dimensions, Alert, KeyboardAvoidingView} from "react-native"
+import React, { useState } from "react"
+import { StyleSheet, View, KeyboardAvoidingView} from "react-native"
+
+//LIBRARIES
 import { Text, Button, TextInput } from "react-native-paper"
 import { useFonts } from "expo-font"
 import * as Haptics from 'expo-haptics'
-import { useState } from "react"
 
-export default Welcome = ({ navigation, dimensions, setApiKey, apiKey }) => {
+export default Welcome = ({ navigation, dimensions, setApiKey }) => {
 
   const [key, setKey] = useState('')
   const [loaded] = useFonts({
