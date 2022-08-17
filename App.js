@@ -1,13 +1,13 @@
 //IMPORTS
-import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
-import { View, Dimensions } from 'react-native';
+import { StatusBar } from 'expo-status-bar'
+import React, {useState} from 'react'
+import { View, Dimensions } from 'react-native'
 import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 //COMPONENTS
-import Dashboard from "./Views/Dashboard";
-import Welcome from './Views/Welcome';
+import Dashboard from "./Views/Dashboard"
+import Welcome from './Views/Welcome'
 import ResponsePage from './Views/ResponsePage'
 import HeaderLogo from './components/Header'
 
@@ -17,7 +17,7 @@ export default App = () => {
   const [apiKey, setApiKey] = useState('')
 
   const windowDimensions = Dimensions. get('window')
-  const Stack = createNativeStackNavigator();
+  const Stack = createNativeStackNavigator()
 
   const handleChange = (baseString, uri) => {
     setImageBaseStrings([...imageBaseStrings, baseString])
@@ -31,7 +31,8 @@ export default App = () => {
           setApiKey = {setApiKey}
           navigation={navigation}
           dimensions={windowDimensions} />
-)}
+    )
+  }
 
   const HomeScreen = ({ navigation }) => {
     return(
