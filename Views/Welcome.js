@@ -33,10 +33,6 @@ export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
             discoverd is a tool to help you identify the plant life around you.
           </Text>
         </View>
-        <View>
-          <View style={{width:dimensions.width, margin:5}}>
-          </View>
-        </View>
         <View style={{width: dimensions.width, alignItems:"center", marginTop:"4%"}}>
           <Button
               testID='Nav-Button-Dashboard'
