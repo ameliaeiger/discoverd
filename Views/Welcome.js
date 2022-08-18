@@ -33,19 +33,6 @@ const Welcome = ({ navigation, dimensions, setApiKey }) => {
             discoverd is a tool to help you identify the plant life around you.
           </Text>
         </View>
-        <View>
-          <View style={{width:dimensions.width, margin:5}}>
-            <TextInput
-              label="* Required"
-              placeholder="Please input API key from Plant.ID"
-              value={key}
-              onChangeText= {setKey}
-              style={{fontSize: 15, width:dimensions.width*.98}}
-              underlineColor="gray"
-              activeUnderlineColor="green"
-            />
-          </View>
-        </View>
         <View style={{width: dimensions.width, alignItems:"center", marginTop:"4%"}}>
           <Button
               testID='Nav-Button-Dashboard'
@@ -54,18 +41,10 @@ const Welcome = ({ navigation, dimensions, setApiKey }) => {
               contentStyle={{padding:10}}
               mode="contained"
               onPress={() => {
-                if(!key){
-                  Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
-                    .catch(error => {
-                       return
-                     })
-                   return alert("Please fill out all required fields.")
-                  }
                 Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
                 .catch(error => {
                   return
                 })
-                setApiKey(key)
                 navigation.navigate("Home")
               }}
             >Get started!

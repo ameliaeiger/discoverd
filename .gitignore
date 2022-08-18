@@ -55,5 +55,5 @@ web-build/
 dist/
 
 #environmental variables
-API_KEY.js
+.env
 config.js

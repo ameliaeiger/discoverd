@@ -10,12 +10,13 @@ import Dashboard from "./Views/Dashboard"
 import Welcome from './Views/Welcome'
 import ResponsePage from './Views/ResponsePage'
 import HeaderLogo from './components/Header'
+import {API_KEY} from '@env'
+
 
 const App = () => {
   const [imageBaseStrings, setImageBaseStrings] = useState([])
   const [imageUris, setImageUris] = useState([])
   const [apiKey, setApiKey] = useState('')
-
   const windowDimensions = Dimensions. get('window')
   const Stack = createNativeStackNavigator()
 
@@ -27,8 +28,6 @@ const App = () => {
   const WelcomeScreen = ({ navigation }) => {
     return (
         <Welcome
-          apiKey = {apiKey}
-          setApiKey = {setApiKey}
           navigation={navigation}
           dimensions={windowDimensions} />
     )
@@ -41,7 +40,9 @@ const App = () => {
           height: windowDimensions.height,
           alignContent: "stretch",
         }}>
+
           <Dashboard handleChange={handleChange} apiKey={apiKey} imageUris={imageUris} navigation={navigation} imageBaseStrings={imageBaseStrings} dimensions={windowDimensions}/>
+
           <StatusBar style="auto" />
         </View>
     )
