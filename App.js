@@ -8,14 +8,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ResponsePage from './Views/ResponsePage'
 import PlantImage from './components/ImageDisplay/PlantImage'
 import HeaderLogo from './components/Header'
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-dotenv.config()
-console.log(process.env.API_KEY)
+import {API_KEY} from '@env'
+
 
 export default function App() {
   const [imageUris, addImageUris] = useState([])
   const [allImages, setAllImages] = useState([])
-  const [apiKey, setApiKey] = useState('')
 
   const windowDimensions = Dimensions. get('window')
   const Stack = createNativeStackNavigator();
@@ -33,8 +31,6 @@ export default function App() {
 
     return (
         <Welcome
-          apiKey = {apiKey}
-          setApiKey = {setApiKey}
           navigation={navigation}
           dimensions={windowDimensions} />
 )}
@@ -46,7 +42,7 @@ export default function App() {
           height: windowDimensions.height,
           alignContent: "stretch",
         }}>
-          <Dashboard handleChange={handleChange} apiKey={apiKey} allImages={allImages} navigation={navigation} images={imageUris} dimensions={windowDimensions}/>
+          <Dashboard handleChange={handleChange} apiKey={API_KEY} allImages={allImages} navigation={navigation} images={imageUris} dimensions={windowDimensions}/>
           <StatusBar style="auto" />
         </View>
     )
