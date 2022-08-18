@@ -8,7 +8,7 @@ import { Button } from 'react-native-paper'
 import * as ImagePicker from 'expo-image-picker'
 import * as Haptics from 'expo-haptics'
 
-export default PickImage = ({handleChange}) => {
+const PickImage = ({handleChange}) => {
 
     let openImagePickerAsync = async () => {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
@@ -44,3 +44,5 @@ export default PickImage = ({handleChange}) => {
       </Button>
   )
 }
+
+export default PickImage

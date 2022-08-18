@@ -6,7 +6,7 @@ import { Text, Button, TextInput } from "react-native-paper"
 import { useFonts } from "expo-font"
 import * as Haptics from 'expo-haptics'
 
-export default Welcome = ({ navigation, dimensions, setApiKey }) => {
+const Welcome = ({ navigation, dimensions, setApiKey }) => {
 
   const [key, setKey] = useState('')
   const [loaded] = useFonts({
@@ -75,6 +75,8 @@ export default Welcome = ({ navigation, dimensions, setApiKey }) => {
     </KeyboardAvoidingView>
   )
 }
+
+export default Welcome
 
 const styles = StyleSheet.create({
   welcomeText: {

@@ -11,7 +11,7 @@ import Welcome from './Views/Welcome'
 import ResponsePage from './Views/ResponsePage'
 import HeaderLogo from './components/Header'
 
-export default App = () => {
+const App = () => {
   const [imageBaseStrings, setImageBaseStrings] = useState([])
   const [imageUris, setImageUris] = useState([])
   const [apiKey, setApiKey] = useState('')
@@ -78,3 +78,5 @@ export default App = () => {
     </NavigationContainer>
   )
 }
+
+export default App

@@ -10,7 +10,7 @@ import PlantImage from '../components/ImageDisplay/PlantImage'
 import PickImage from "../components/PickImage/PickImage"
 import TakePicture from "../components/TakePicture/TakePicture"
 
-export default Dashboard = ({ navigation, handleChange, imageUris, imageBaseStrings, dimensions, apiKey }) => {
+const Dashboard = ({ navigation, handleChange, imageUris, imageBaseStrings, dimensions, apiKey }) => {
 
   const [hasImages, setHasImages] = useState("")
 
@@ -87,6 +87,8 @@ export default Dashboard = ({ navigation, handleChange, imageUris, imageBaseStri
     </View>
   )
 }
+
+export default Dashboard
 
 const styles = StyleSheet.create({
   scrollView: {
