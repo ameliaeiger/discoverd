@@ -56,5 +56,4 @@ dist/
 
 #environmental variables
 .env
-API_KEY.js
 config.js

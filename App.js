@@ -8,7 +8,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ResponsePage from './Views/ResponsePage'
 import PlantImage from './components/ImageDisplay/PlantImage'
 import HeaderLogo from './components/Header'
-console.log(process.env.REACT_APP_API_KEY)
+import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config()
+console.log(process.env.API_KEY)
 
 export default function App() {
   const [imageUris, addImageUris] = useState([])
