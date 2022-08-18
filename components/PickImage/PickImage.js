@@ -1,13 +1,14 @@
-import React, {useState, useEffect} from 'react'
-import * as ImagePicker from 'expo-image-picker'
-import * as Haptics from 'expo-haptics';
+import React from 'react'
+
+//COMPONENTS
 import {styles} from './PickImageStyles'
-//Libraries
-import { Button } from "react-native-paper"
 
-export default function PickImage({handleChange}) {
+//LIBRARIES
+import { Button } from 'react-native-paper'
+import * as ImagePicker from 'expo-image-picker'
+import * as Haptics from 'expo-haptics'
 
-  const [localUri, setUri] = useState("")
+const PickImage = ({handleChange}) => {
 
     let openImagePickerAsync = async () => {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
@@ -24,8 +25,10 @@ export default function PickImage({handleChange}) {
       if(pickerResult.cancelled) {
         return
       }
-      setUri(pickerResult.uri)
-      handleChange(pickerResult.base64, pickerResult.uri)
+      handleChange(
+        pickerResult.base64, 
+        pickerResult.uri
+        )
       }
   return (
       <Button
@@ -41,3 +44,5 @@ export default function PickImage({handleChange}) {
       </Button>
   )
 }
+
+export default PickImage

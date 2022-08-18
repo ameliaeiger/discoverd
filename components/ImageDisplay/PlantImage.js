@@ -1,16 +1,16 @@
 import React from 'react'
 import { Image, TouchableOpacity } from 'react-native'
+
+//STYLES
 import {styles} from '../PickImage/PickImageStyles'
 
-const PlantImage = ({key, uri}) => {
+const PlantImage = ({id, uri}) => {
   return(
     <TouchableOpacity 
-        id={key}>
+        key={id}>
           <Image
-            key={key}
             style={styles.thumbnail}
-            source={{uri:uri}}
-        />
+            source={{uri:uri}} />
     </TouchableOpacity>
   )
 }
