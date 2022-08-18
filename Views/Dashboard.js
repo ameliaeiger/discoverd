@@ -1,27 +1,35 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 
-//Libraries
+//LIBRARIES
 import { Button } from 'react-native-paper'
+import * as Haptics from 'expo-haptics'
+
+//COMPONENTS
+import PlantImage from '../components/ImageDisplay/PlantImage'
 import PickImage from "../components/PickImage/PickImage"
 import TakePicture from "../components/TakePicture/TakePicture"
-import * as Haptics from 'expo-haptics';
 
-export default function Dashboard({ navigation, handleChange, allImages, images, dimensions, apiKey }) {
+const Dashboard = ({ navigation, handleChange, imageUris, imageBaseStrings, dimensions, apiKey }) => {
 
   const [hasImages, setHasImages] = useState("")
 
   useEffect(() => {
-    console.log(allImages)
-    if (!allImages[0]){
+    if (imageUris.length == 0){
       setHasImages(false)
       return
-    } else if (allImages){
-      console.log(allImages)
+    } else if (imageUris){
       setHasImages(true)
       return
     }
-  },[allImages])
+  },[allUserImages])
+
+  const allUserImages = () => {
+    let thisMap = imageUris.map(uri => {
+    return <PlantImage key={uri} uri={uri}/>
+    })
+    return thisMap
+  }
 
   const displayText = () => {
     return (
@@ -35,26 +43,25 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
   }
 
   const displayImages = () => {
+    let userSelectedImages = []
+    userSelectedImages = allUserImages()
     return (
       <ScrollView horizontal={true} contentContainerStyle={{justifyContent:"center", alignItems:"center"}} style={{width: dimensions.width,
         height: 400, maxHeight:400, enum:"black", backgroundColor:"#FCFFF8", borderTopWidth:10, borderBottomWidth:10, borderColor:"#147d00"}}>
-            {allImages}
+            {userSelectedImages}
       </ScrollView>
     )
   }
 
   return (
-    <View testID='Dashboard' accessibilityLabel='Dashboard' style={{
-      width: dimensions.width,
-      maxHeight: dimensions.height,
-      }}>
+    <View testID='Dashboard' accessibilityLabel='Dashboard' style={{width: dimensions.width, maxHeight: dimensions.height}}>
         {hasImages===false ? displayText() : displayImages()}
       <View testID='Button-Container' accessibilityLabel='Button Container' style={styles.buttonContainer}>
         <View style={{flexDirection:"row"}}>
           <PickImage handleChange={handleChange}/>
           <TakePicture handleChange={handleChange}/>
         </View>
-      <View>
+        <View>
           <Button
             testID='Response-Button'
             accessibilityLabel='Check Possible Plant'
@@ -65,20 +72,23 @@ export default function Dashboard({ navigation, handleChange, allImages, images,
             icon="magnify"
             color="white"
             onPress={() => {
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
-            .catch(error => {
-              return
-            })
-            navigation.navigate("Results", {apiKey: apiKey,
-            uris:images,
-            })
-          }}> discover
+              Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+              .catch(error => {
+                return
+              })
+              //Navigates to ResponsePage, NOT the component Results. However, this is how the title of the results page is displayed to the user.
+              navigation.navigate("Results", {apiKey: apiKey,
+                imageBaseStrings:imageBaseStrings,
+              })
+            }}> discover
           </Button>
         </View>
       </View>
-  </View>
+    </View>
   )
 }
+
+export default Dashboard
 
 const styles = StyleSheet.create({
   scrollView: {

@@ -1,22 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native'
+import React, {useEffect, useState} from 'react'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 
 //Libraries
 import Results from "../components/Results"
 import Data from "./data.js"
-import Data2 from './data2.js';
+import Data2 from './data2.js'
 
 export default function ResponsePage({ route }) {
-  const { uris } = route.params;
+  const { imageBaseStrings } = route.params
+  const { apiKey } = route.params;
   const [suggestions, setSuggestions] = useState(Data().suggestions)
   const [resultsCards, setResultsCards] = useState([])
   const [errMessage, setErr] = useState(null)
-  const { apiKey } = route.params;
   
-  const handleSubmit = (uri) => {
+  const handleSubmit = () => {
     const data = {
         api_key: apiKey,
-        images: [uri[0]],
+        images: [imageBaseStrings[0]],
         plant_language: 'en',
             plant_details: ['common_names',
                             'url',
@@ -34,24 +34,22 @@ export default function ResponsePage({ route }) {
          },
          body: JSON.stringify(data),
        })
-
        .then((response) => {
         if (!response.ok) {
-          throw new Error(response.status + " " + response.statusText);
+          throw new Error(response.status + " " + response.statusText)
         } else {
-          return response.json();
+          return response.json()
         }
       })
        .then(result => {
          setSuggestions(result.suggestions)
        })
        .catch((error) => {
-         setErr(`${error}`);
-       });
+         setErr(`${error}`)
+       })
   }
 
   const createResults = () => {
-
     if(!errMessage) {
       const resultsCardsArr = suggestions.map((suggestion) => {
             return <Results key={suggestion.id} data={suggestion}/>
@@ -62,7 +60,7 @@ export default function ResponsePage({ route }) {
 
   useEffect(() => {
     if(!errMessage){
-      handleSubmit(uris)
+      handleSubmit(imageBaseStrings)
         setTimeout(() => {
           setSuggestions(Data2().suggestions)
         }, 1000)
@@ -72,6 +70,7 @@ export default function ResponsePage({ route }) {
   useEffect(() => {
     createResults()
   }, [suggestions, errMessage])
+  
   if(errMessage) {
     return(
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -95,8 +94,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  scroll: {
-
   },
 })

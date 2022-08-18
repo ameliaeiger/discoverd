@@ -1,20 +1,20 @@
-import * as React from "react"
-import { StyleSheet, View, Dimensions, Alert, KeyboardAvoidingView} from "react-native"
+import React, { useState } from "react"
+import { StyleSheet, View, KeyboardAvoidingView} from "react-native"
+
+//LIBRARIES
 import { Text, Button, TextInput } from "react-native-paper"
 import { useFonts } from "expo-font"
-import * as Haptics from 'expo-haptics';
-import { useState, useEffect } from "react"
+import * as Haptics from 'expo-haptics'
 
-export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
+const Welcome = ({ navigation, dimensions, setApiKey }) => {
 
   const [key, setKey] = useState('')
   const [loaded] = useFonts({
       Poppins: require('../assets/poppinsLight.ttf'),
-    })
+    },[])
     if (!loaded) {
       return <Text>loading</Text>
     }
-
 
   return (
     <KeyboardAvoidingView behavior="height" style={{flex:1}}>
@@ -76,6 +76,8 @@ export default function Welcome({ navigation, dimensions, setApiKey, apiKey }) {
   )
 }
 
+export default Welcome
+
 const styles = StyleSheet.create({
   welcomeText: {
     margin: 25,
@@ -99,8 +101,4 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     backgroundColor:"#147d00",
   },
-  // buttonContainer: {
-  //   width: dimensions.width,
-  //   justifyContent:"center"
-  // }
 })
