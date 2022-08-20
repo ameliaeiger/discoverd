@@ -5,6 +5,7 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import Results from "../components/Results"
 import Data from "./data.js"
 import Data2 from './data2.js'
+import Loading from '../components/Loading.js'
 
 export default function ResponsePage({ route }) {
   const { imageBaseStrings } = route.params
@@ -12,7 +13,8 @@ export default function ResponsePage({ route }) {
   const [suggestions, setSuggestions] = useState(Data().suggestions)
   const [resultsCards, setResultsCards] = useState([])
   const [errMessage, setErr] = useState(null)
-  
+  const [loading, setLoading] = useState(true)
+
   const handleSubmit = () => {
     const data = {
         api_key: apiKey,
@@ -43,6 +45,7 @@ export default function ResponsePage({ route }) {
       })
        .then(result => {
          setSuggestions(result.suggestions)
+         setLoading(false)
        })
        .catch((error) => {
          setErr(`${error}`)
@@ -70,7 +73,7 @@ export default function ResponsePage({ route }) {
   useEffect(() => {
     createResults()
   }, [suggestions, errMessage])
-  
+
   if(errMessage) {
     return(
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -82,7 +85,7 @@ export default function ResponsePage({ route }) {
   }else {
     return (
         <ScrollView style={styles.scroll}>
-          {resultsCards}
+        {loading ? <Loading /> : {resultsCards}}
         </ScrollView>
     )
   }
